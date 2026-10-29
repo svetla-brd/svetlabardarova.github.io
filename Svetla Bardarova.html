@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Svetla Bardarova</title>
+<meta name="description" content="Svetla Bardarova is a product designer working across design systems, interfaces and brand identity.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ffffff; --fg:#141414; --mute:#8a8a8a; --tile:#ececec; --line:#e2e2e2;
+  color-scheme:light; box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#101010;--fg:#f1f1f1;--mute:#7d7d7d;--tile:#1d1d1d;--line:#262626;color-scheme:dark}
+}
+:root[data-theme="dark"]{--bg:#101010;--fg:#f1f1f1;--mute:#7d7d7d;--tile:#1d1d1d;--line:#262626;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 15px/1.4 "Inter Tight",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+a:hover{text-decoration:underline;text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--fg);outline-offset:3px}
+.wrap{max-width:1400px;margin:0 auto;padding:24px clamp(16px,3vw,40px) 40px}
+.top{display:flex;justify-content:space-between;gap:16px;align-items:baseline}
+.nav{display:flex;gap:clamp(16px,3vw,32px)}
+.nav a{color:var(--mute)}
+.nav a:hover{color:var(--fg)}
+.portrait{display:block;width:100px;height:125px;object-fit:cover}
+.top .name{font-weight:500}
+.top .role,.meta{color:var(--mute)}
+.intro{margin:clamp(56px,12vw,160px) 0 0;max-width:22em;font-size:clamp(26px,4.2vw,58px);line-height:1.08;letter-spacing:-.025em;font-weight:500}
+.more{display:none}
+.more.open{display:inline}
+.toggle{font:inherit;color:var(--mute);background:none;border:0;padding:0;cursor:pointer;letter-spacing:inherit}
+.toggle:hover{color:var(--fg)}
+.contact{margin-top:32px;display:flex;gap:24px;flex-wrap:wrap}
+.contact .time{color:var(--mute);font-variant-numeric:tabular-nums}
+.work-head{margin:clamp(64px,10vw,140px) 0 12px;display:flex;justify-content:space-between;border-top:1px solid var(--line);padding-top:12px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:40px 16px}
+.item a{display:block}
+.tile{aspect-ratio:4/3;background:var(--tile);display:flex;align-items:center;justify-content:center;color:var(--mute);font-size:13px}
+.cap{display:flex;justify-content:space-between;gap:12px;padding-top:8px}
+.cap .yr{color:var(--mute)}
+footer{margin-top:clamp(64px,10vw,140px);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:12px;color:var(--mute)}
+footer a:hover{color:var(--fg)}
+.back{display:inline-block;margin:clamp(40px,8vw,96px) 0 24px;color:var(--mute)}
+.c-top{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,64px);align-items:start}
+.c-cover{aspect-ratio:4/5}
+.c-info{position:sticky;top:24px}
+.c-info h1{margin:0 0 24px;font-size:clamp(40px,6vw,88px);line-height:1;letter-spacing:-.03em;font-weight:500}
+.c-desc{margin:0;max-width:32em;font-size:17px;line-height:1.45}
+.c-info dl{margin:40px 0 0}
+.c-info dl div{display:grid;grid-template-columns:110px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--line)}
+.c-info dt{color:var(--mute)}
+.c-info dd{margin:0}
+.c-gallery{display:grid;gap:16px;margin-top:16px}
+.c-row{display:grid;gap:16px}
+.c2{grid-template-columns:1fr 1fr}
+.c-quote{margin:clamp(64px,10vw,140px) 0 0;padding:0}
+.c-quote p{margin:0;max-width:28em;font-size:clamp(22px,3vw,40px);line-height:1.15;letter-spacing:-.02em;font-weight:500}
+.c-by{margin-top:16px;color:var(--mute)}
+.c-split{align-items:center;gap:clamp(24px,4vw,64px)}
+.c-text h2{margin:0 0 16px;font-size:clamp(22px,2.4vw,32px);line-height:1.1;letter-spacing:-.02em;font-weight:500}
+.c-text p{margin:0 0 28px;max-width:30em;font-size:16px;line-height:1.45}
+.c-text table{width:100%;border-collapse:collapse;font-size:14px}
+.c-text th,.c-text td{text-align:left;padding:10px 12px 10px 0;border-top:1px solid var(--line);vertical-align:top}
+.c-text th{color:var(--mute);font-weight:400}
+.c-end{margin-top:clamp(64px,10vw,140px)}
+.c-endrow{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,64px);padding:24px 0;border-top:1px solid var(--line)}
+.c-endrow h2{margin:0;font-size:clamp(22px,2.4vw,32px);line-height:1.1;letter-spacing:-.02em;font-weight:500}
+.c-endrow p{margin:0;max-width:34em;font-size:16px;line-height:1.45}
+.c-endrow .c-quote{margin:0}
+.c-endrow .c-quote p{font-size:clamp(20px,2.2vw,30px)}
+@media (max-width:640px){.grid{grid-template-columns:1fr}.portrait{width:72px;height:90px}.c-split{grid-template-columns:1fr}.c-endrow{grid-template-columns:1fr}.c-top{grid-template-columns:1fr}.c-info{position:static}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+.wordmark{margin:clamp(40px,10vw,120px) 0 0;font-size:clamp(56px,17vw,280px);line-height:.85;letter-spacing:-.05em;font-weight:500}
+.hero-row{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,64px);margin-top:clamp(32px,5vw,64px);align-items:end}
+.tag{margin:0;max-width:22em;font-size:clamp(20px,2.4vw,32px);line-height:1.15;letter-spacing:-.02em;font-weight:500}
+.hero-side{display:flex;gap:16px;justify-content:flex-end;align-items:flex-end;text-align:right}
+.hero-side .meta{font-variant-numeric:tabular-nums}
+.stack{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.card{display:flex;flex-direction:column;justify-content:space-between;position:relative;aspect-ratio:4/5}
+.card.wide{grid-column:1/-1;aspect-ratio:auto;height:min(80vh,720px)}
+.card:hover{text-decoration:none}
+.card .tile{position:absolute;inset:0;aspect-ratio:auto}
+.card .c-name,.card .c-foot{position:sticky;z-index:1}
+.card .c-name{top:0;align-self:flex-start;padding:16px;font-size:clamp(20px,2.4vw,32px);line-height:1.1;letter-spacing:-.02em;font-weight:500}
+.card .c-foot{bottom:0;display:flex;justify-content:space-between;gap:12px;padding:16px}
+@media (max-width:640px){.hero-row{grid-template-columns:1fr}.hero-side{justify-content:space-between;text-align:left}.stack{grid-template-columns:1fr}.card,.card.wide{aspect-ratio:auto;height:70vh}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="name" href="#" data-go="top">Svetla Bardarova</a>
+    <nav class="nav" aria-label="Main">
+      <a href="#" data-go="top">Home</a>
+      <a href="#" data-go="works">Work</a>
+      <a href="#" data-go="about">About</a>
+      <a href="mailto:your@email.com">Let’s talk</a>
+    </nav>
+  </header>
+
+  <main>
+    <div id="home">
+    <section class="hero">
+      <h1 class="wordmark">Bardarova</h1>
+      <div class="hero-row">
+        <p class="tag">I design clear, consistent digital products and design systems that help teams build with confidence.</p>
+        <div class="hero-side"><span class="meta" id="clock">00:00:00, City</span><img class="portrait" src="data:image/jpeg;base64,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" width="100" height="125" alt="Silhouette portrait lit in red"></div>
+      </div>
+    </section>
+    <div id="works">
+      <div class="work-head"><span>Selected work</span><span class="meta" id="count"></span></div>
+      <section class="stack" id="grid" aria-label="Selected work"></section>
+    </div>
+    <div class="c-end" id="about">
+      <div class="c-endrow"><h2>About</h2><p>Write two or three sentences about your background, the kind of products you design and how you work with teams.</p></div>
+      <div class="c-endrow"><h2>Elsewhere</h2><p><a href="mailto:your@email.com">Mail</a>, <a href="https://www.linkedin.com/" rel="noopener">LinkedIn</a>, <a href="https://www.behance.net/" rel="noopener">Behance</a></p></div>
+    </div>
+    </div>
+    <article id="case" hidden></article>
+  </main>
+
+  <footer>
+    <span id="year"></span>
+    <a href="#" id="top">Back to top</a>
+  </footer>
+</div>
+
+<script>
+// Edit these to update the page.
+var CITY = "City";
+var TIMEZONE = "UTC"; // e.g. "Europe/Lisbon"
+// Each project opens its own case study page. Add desc and client to fill them in.
+var PROJECTS = [
+  {slug:"legacy-design-system", wide:true, name:"Legacy design system audit", year:"2026", services:"Design system, Audit, Product design"},
+  {slug:"nuklai", name:"Nuklai design system", year:"2025", services:"Design system, Product design"},
+  {slug:"kadena", name:"Kadena", year:"2024", services:"Product design"},
+  {slug:"coinfantasy", name:"Coinfantasy", year:"2024", services:"Product design"},
+  {slug:"logos", name:"Logo and identity work", year:"2023", services:"Brand identity"}
+];
+
+var grid = document.getElementById("grid");
+PROJECTS.forEach(function(p,i){
+  var a = document.createElement("a");
+  a.className = "card" + (p.wide ? " wide" : ""); a.href = "#" + p.slug;
+  a.innerHTML = '<div class="tile">Cover image</div><span class="c-name">'+p.name+'</span><div class="c-foot"><span>'+p.services+'</span><span>'+p.year+'</span></div>';
+  grid.appendChild(a);
+});
+document.getElementById("count").textContent = PROJECTS.length + " projects";
+document.getElementById("year").textContent = "© " + new Date().getFullYear() + " Svetla Bardarova";
+
+
+function tick(){
+  var s;
+  try{
+    s = new Intl.DateTimeFormat("en-GB",{hour:"2-digit",minute:"2-digit",second:"2-digit",hour12:false,timeZone:TIMEZONE}).format(new Date());
+  }catch(e){ s = new Date().toTimeString().slice(0,8); }
+  document.getElementById("clock").textContent = s + ", " + CITY;
+}
+tick(); setInterval(tick,1000);
+
+var DESC = "Add a short description of the project: the problem, your role and the result.";
+// Image rows are arrays of aspect ratios. Split rows put text and a table beside an image (img: "left" or "right").
+var ROWS = [["4/3"],{t:0,img:"left"},["3/4","3/4"],{t:1,img:"right"},["4/3"],["4/3","4/3"]];
+var BLOCKS = [
+  {title:"Context", text:"Describe the starting point: the product, the team and the problem you were asked to solve.", table:[["Area","Before","After"],["Components","Add detail","Add detail"],["Tokens","Add detail","Add detail"],["Documentation","Add detail","Add detail"]]},
+  {title:"Approach", text:"Explain the decisions you made and why, and how you worked with developers and other designers.", table:[["Phase","Focus","Outcome"],["Audit","Add detail","Add detail"],["Rebuild","Add detail","Add detail"],["Rollout","Add detail","Add detail"]]}
+];
+var home = document.getElementById("home"), cs = document.getElementById("case");
+function card(p){
+  return '<article class="item"><a href="#'+p.slug+'"><div class="tile">Cover image</div><div class="cap"><span>'+p.name+'</span><span class="yr">'+p.year+'</span></div></a></article>';
+}
+function render(p){
+  var i = PROJECTS.indexOf(p);
+  var more = [PROJECTS[(i+1)%PROJECTS.length], PROJECTS[(i+2)%PROJECTS.length]];
+  var rows = ROWS.map(function(r){
+    if(!Array.isArray(r)){
+      var b = BLOCKS[r.t];
+      var im = '<div class="tile" style="aspect-ratio:4/5">Image</div>';
+      var tb = '<table><thead><tr>'+b.table[0].map(function(c){return '<th>'+c+'</th>';}).join("")+'</tr></thead><tbody>'+b.table.slice(1).map(function(row){return '<tr>'+row.map(function(c){return '<td>'+c+'</td>';}).join("")+'</tr>';}).join("")+'</tbody></table>';
+      var tx = '<div class="c-text"><h2>'+b.title+'</h2><p>'+b.text+'</p>'+tb+'</div>';
+      return '<div class="c-row c2 c-split">'+(r.img==="left" ? im+tx : tx+im)+'</div>';
+    }
+    return '<div class="c-row c'+r.length+'">'+r.map(function(a){return '<div class="tile" style="aspect-ratio:'+a+'">Image</div>';}).join("")+'</div>';
+  }).join("");
+  cs.innerHTML = '<a class="back" href="#">All work</a>'
+    + '<div class="c-top"><div class="tile c-cover">Cover image</div><div class="c-info"><h1>'+p.name+'</h1><p class="c-desc">'+(p.desc||DESC)+'</p>'
+    + '<dl><div><dt>Year</dt><dd>'+p.year+'</dd></div><div><dt>Client</dt><dd>'+(p.client||"Client name")+'</dd></div><div><dt>Services</dt><dd>'+p.services+'</dd></div></dl></div></div>'
+    + '<div class="c-gallery">'+rows+'</div>'
+    + '<div class="c-end">'
+    + '<div class="c-endrow"><h2>Outcome</h2><p>Summarise the result: what changed, who it helped and any numbers you can share.</p></div>'
+    + '<div class="c-endrow"><h2>Reflection</h2><p>Close with what you learned and what you would do differently next time.</p></div>'
+    + '<div class="c-endrow"><h2>Review</h2><blockquote class="c-quote"><p>Add a short quote from a colleague or client.</p><div class="c-by">Name, role</div></blockquote></div>'
+    + '</div>'
+    + '<div class="work-head"><span>More work</span><a href="#">See all</a></div><div class="grid">'+more.map(card).join("")+'</div>';
+}
+function route(){
+  var s = location.hash.slice(1);
+  var p = PROJECTS.filter(function(x){return x.slug===s;})[0];
+  if(p){ render(p); home.hidden = true; cs.hidden = false; document.title = p.name + " – Svetla Bardarova"; }
+  else { home.hidden = false; cs.hidden = true; document.title = "Svetla Bardarova"; }
+  if(pending){ go(); } else { window.scrollTo(0,0); }
+}
+var pending = null;
+function go(){
+  var el = pending && pending !== "top" ? document.getElementById(pending) : null;
+  if(el){ el.scrollIntoView(); } else { window.scrollTo(0,0); }
+  pending = null;
+}
+document.querySelectorAll("[data-go]").forEach(function(a){
+  a.addEventListener("click", function(e){
+    e.preventDefault(); pending = a.getAttribute("data-go");
+    if(location.hash){ location.hash = ""; } else { go(); }
+  });
+});
+window.addEventListener("hashchange", route);
+route();
+document.getElementById("top").addEventListener("click", function(e){ e.preventDefault(); window.scrollTo({top:0}); });
+</script>
+</body>
+</html>
