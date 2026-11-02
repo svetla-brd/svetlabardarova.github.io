@@ -48,10 +48,11 @@ h1,h2,h3,.work-head,.c-name,.cap > span:first-child{text-transform:uppercase}
 .tile{aspect-ratio:4/3;background:var(--tile);display:flex;align-items:center;justify-content:center;color:var(--mute);font-size:clamp(11px,.4vw + 10px,13px)}
 .cap{display:flex;justify-content:space-between;gap:12px;padding-top:8px;font-size:clamp(12px,.3vw + 11px,15px)}
 .cap .yr{color:var(--mute)}
-footer{margin-top:clamp(40px,8vw,140px);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid var(--line);padding:12px clamp(16px,3vw,40px) 0;color:var(--mute);font-size:clamp(12px,.25vw + 11.2px,15px)}
+footer{margin-top:clamp(40px,8vw,140px);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid var(--line);padding:12px var(--gutter) 0;color:var(--mute);font-size:clamp(12px,.25vw + 11.2px,15px)}
 footer a:hover{color:var(--fg)}
 .back{display:inline-block;margin:clamp(24px,5vw,96px) 0 20px;color:var(--mute)}
-#case{padding-top:clamp(56px,10vw,72px)}
+#case{padding:clamp(56px,10vw,72px) var(--gutter) 0;box-sizing:border-box}
+#case .c-end,#case .work-head,#case .grid{padding-left:0;padding-right:0}
 .c-top{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,4vw,64px);align-items:start}
 .c-cover{aspect-ratio:4/5}
 .c-info{position:sticky;top:88px}
@@ -73,7 +74,7 @@ footer a:hover{color:var(--fg)}
 .c-text table{width:100%;border-collapse:collapse;font-size:clamp(12px,.3vw + 11px,14px)}
 .c-text th,.c-text td{text-align:left;padding:10px 12px 10px 0;border-top:1px solid var(--line);vertical-align:top}
 .c-text th{color:var(--mute);font-weight:400}
-.c-end{margin-top:clamp(40px,8vw,140px);padding:0 clamp(16px,3vw,40px)}
+.c-end{margin-top:clamp(40px,8vw,140px);padding:0 var(--gutter)}
 .c-endrow{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,3vw,64px);padding:clamp(16px,2.5vw,24px) 0;border-top:1px solid var(--line)}
 .c-endrow h2{margin:0;font-size:clamp(18px,1.6vw + .55rem,32px);line-height:1.1;letter-spacing:-.02em;font-weight:500}
 .c-endrow p{margin:0;max-width:34em;font-size:clamp(14px,.35vw + 12.5px,16px);line-height:1.45}
@@ -88,7 +89,7 @@ footer a:hover{color:var(--fg)}
 .hero > :not(.trail){position:relative;z-index:1}
 #works,#about,footer{position:relative;z-index:30;cursor:auto}
 .wordmark{margin:clamp(40px,10vw,160px) 0 0;font-size:clamp(48px,14vw,300px);line-height:.85;letter-spacing:-.05em;font-weight:500;max-width:100%;overflow-wrap:anywhere}
-.hero-row{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,3vw,64px);margin-top:auto;padding:clamp(28px,5vw,80px) clamp(16px,3vw,40px) 0;align-items:end;min-width:0}
+.hero-row{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,3vw,64px);margin-top:auto;padding:clamp(28px,5vw,80px) var(--gutter) 0;align-items:end;min-width:0}
 .tag{margin:0;max-width:22em;font-size:clamp(16px,1.7vw + .55rem,32px);line-height:1.2;letter-spacing:-.02em;font-weight:500;min-width:0;text-transform:uppercase}
 .hero-side{display:flex;gap:12px;justify-content:flex-end;align-items:flex-end;text-align:right;min-width:0;font-size:clamp(12px,.25vw + 11.2px,15px)}
 .hero-side .meta{font-variant-numeric:tabular-nums}
