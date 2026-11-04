@@ -13,6 +13,7 @@
 :root{
   --bg:#ffffff; --fg:#141414; --mute:#8a8a8a; --tile:#ececec; --line:#e2e2e2;
   --gutter:clamp(16px,3vw,40px);
+  --text:clamp(12px,.25vw + 11.2px,15px);
   color-scheme:light; box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
 }
@@ -28,7 +29,7 @@ a:hover{text-decoration:underline;text-underline-offset:3px}
 h1,h2,h3,.work-head,.c-name,.cap > span:first-child{text-transform:uppercase}
 :focus-visible{outline:2px solid var(--fg);outline-offset:3px}
 .wrap{max-width:none;width:100%;margin:0;padding:0 0 40px;overflow-x:clip}
-.top{display:flex;justify-content:space-between;gap:12px;align-items:baseline;min-width:0;position:fixed;top:0;left:0;right:0;z-index:50;cursor:auto;padding:clamp(14px,2.2vw,24px) var(--gutter);width:100%;box-sizing:border-box;text-transform:uppercase;background:transparent;color:#fff;mix-blend-mode:difference;font-size:clamp(12px,.25vw + 11.2px,15px)}
+.top{display:flex;justify-content:space-between;gap:12px;align-items:baseline;min-width:0;position:fixed;top:0;left:0;right:0;z-index:50;cursor:auto;padding:clamp(14px,2.2vw,24px) var(--gutter);width:100%;box-sizing:border-box;text-transform:uppercase;background:transparent;color:#fff;mix-blend-mode:difference;font-size:var(--text)}
 .nav{display:flex;flex-wrap:wrap;gap:clamp(12px,2.5vw,32px);justify-content:flex-end;min-width:0}
 .nav a{color:inherit;opacity:.72}
 .nav a:hover{opacity:1;text-decoration:none}
@@ -89,8 +90,10 @@ footer a:hover{color:var(--fg)}
 .hero > :not(.trail){position:relative;z-index:1}
 #works,#about,footer{position:relative;z-index:30;cursor:auto}
 .wordmark{margin:clamp(40px,10vw,160px) 0 0;font-size:clamp(48px,14vw,300px);line-height:.85;letter-spacing:-.05em;font-weight:500;max-width:100%;overflow-wrap:anywhere}
-.hero-row{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,3vw,64px);margin-top:auto;padding:clamp(28px,5vw,80px) var(--gutter) 0;align-items:end;min-width:0}
-.tag{margin:0;max-width:22em;font-size:clamp(16px,1.7vw + .55rem,32px);line-height:1.2;letter-spacing:-.02em;font-weight:500;min-width:0;text-transform:uppercase}
+.lead{margin:0;padding:clamp(12px,2vw,24px) var(--gutter) 0;width:100%;max-width:none;box-sizing:border-box;font-size:var(--text);line-height:1.4;letter-spacing:inherit;font-weight:400;text-transform:uppercase;position:relative;z-index:1;color:var(--mute)}
+.lead a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+.lead a:hover{color:var(--fg)}
+.hero-row{display:flex;justify-content:flex-end;gap:clamp(16px,3vw,64px);margin-top:auto;padding:clamp(28px,5vw,80px) var(--gutter) 0;align-items:end;min-width:0}
 .hero-side{display:flex;gap:12px;justify-content:flex-end;align-items:flex-end;text-align:right;min-width:0;font-size:clamp(12px,.25vw + 11.2px,15px)}
 .hero-side .meta{font-variant-numeric:tabular-nums}
 .stack{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(6px,1vw,8px);min-width:0;width:100%;padding:0 var(--gutter);box-sizing:border-box}
@@ -111,8 +114,7 @@ footer a:hover{color:var(--fg)}
 @media (max-width:640px){
   .grid{grid-template-columns:1fr}
   .c-split,.c-endrow{grid-template-columns:1fr}
-  .hero-row{grid-template-columns:1fr}
-  .hero-side{justify-content:space-between;text-align:left}
+  .hero-side{justify-content:space-between;text-align:left;width:100%}
   .stack{grid-template-columns:minmax(0,1fr);gap:6px}
   .card .tile,.card.wide .tile{aspect-ratio:4/3}
   .card .c-foot{align-items:flex-start}
@@ -134,8 +136,8 @@ footer a:hover{color:var(--fg)}
     <div id="home">
     <section class="hero">
       <div class="trail" aria-hidden="true"></div>
+      <p class="lead" id="about">Svetla Bardarova is a product designer working across design systems, interfaces, and brand identity. Her practice is shaped by a focus on clarity, consistency, and the systems that help teams build with confidence. She designs digital products and tools for teams that care about craft, structure, and long-term quality. To discuss a collaboration or request a full portfolio, contact <a href="mailto:your@email.com">your@email.com</a>.</p>
       <div class="hero-row">
-        <p class="tag">I design clear, consistent digital products and design systems that help teams build with confidence.</p>
         <div class="hero-side"><span class="meta" id="clock">00:00:00, Lisbon</span><img class="portrait" src="data:image/jpeg;base64,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" width="100" height="125" alt="Silhouette portrait lit in red"></div>
       </div>
     </section>
@@ -143,8 +145,7 @@ footer a:hover{color:var(--fg)}
       <div class="work-head"><span>Selected work</span><span class="meta" id="count"></span></div>
       <section class="stack" id="grid" aria-label="Selected work"></section>
     </div>
-    <div class="c-end" id="about">
-      <div class="c-endrow"><h2>About</h2><p>Write two or three sentences about your background, the kind of products you design and how you work with teams.</p></div>
+    <div class="c-end" id="elsewhere">
       <div class="c-endrow"><h2>Elsewhere</h2><p><a href="mailto:your@email.com">Mail</a>, <a href="https://www.linkedin.com/" rel="noopener">LinkedIn</a>, <a href="https://www.behance.net/" rel="noopener">Behance</a></p></div>
     </div>
     </div>
