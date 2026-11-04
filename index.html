@@ -88,10 +88,12 @@ footer a:hover{color:var(--fg)}
 .trail-img.is-on{transform:translate(-50%,-50%) scale(1)}
 .trail-img.is-off{transform:translate(-50%,-50%) scale(0)}
 .hero > :not(.trail){position:relative;z-index:1}
-#works,#about,footer{position:relative;z-index:30;cursor:auto}
+#works,#elsewhere,footer{position:relative;z-index:30;cursor:auto}
+.hero .trail{z-index:25}
+.hero .lead,.hero .hero-row{z-index:1}
 .wordmark{margin:clamp(40px,10vw,160px) 0 0;font-size:clamp(48px,14vw,300px);line-height:.85;letter-spacing:-.05em;font-weight:500;max-width:100%;overflow-wrap:anywhere}
-.lead{margin:0;padding:clamp(12px,2vw,24px) var(--gutter) 0;width:100%;max-width:none;box-sizing:border-box;font-size:var(--text);line-height:1.4;letter-spacing:inherit;font-weight:400;text-transform:uppercase;position:relative;z-index:1;color:var(--mute)}
-.lead a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+.lead{margin:0;padding:clamp(12px,2vw,24px) var(--gutter) 0;width:100%;max-width:none;box-sizing:border-box;font-size:var(--text);line-height:1.4;letter-spacing:inherit;font-weight:400;text-transform:uppercase;position:relative;z-index:1;color:var(--fg)}
+.lead a{color:var(--mute);text-decoration:underline;text-underline-offset:3px}
 .lead a:hover{color:var(--fg)}
 .hero-row{display:flex;justify-content:flex-end;gap:clamp(16px,3vw,64px);margin-top:auto;padding:clamp(28px,5vw,80px) var(--gutter) 0;align-items:end;min-width:0}
 .hero-side{display:flex;gap:12px;justify-content:flex-end;align-items:flex-end;text-align:right;min-width:0;font-size:clamp(12px,.25vw + 11.2px,15px)}
