@@ -138,12 +138,12 @@ function applyHeadScale() {
 }
 
 const draco = new DRACOLoader();
-draco.setDecoderPath("https://head-turn.apps.grok.bot/draco/");
+draco.setDecoderPath("draco/");
 const loader = new GLTFLoader();
 loader.setDRACOLoader(draco);
 
 loader.load(
-  "https://head-turn.apps.grok.bot/models/head.glb",
+  "models/head.glb",
   (gltf) => {
     if (!alive) return;
     const model = gltf.scene;
