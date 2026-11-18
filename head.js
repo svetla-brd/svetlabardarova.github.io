@@ -231,7 +231,9 @@ function frame() {
   head.rotation.x = pitch + pitchBias;
 
   if (!reduced.matches) {
-    head.position.y = 0.07 * Math.sin(0.9 * clock.elapsedTime);
+    const compact = mount.clientWidth < 140;
+    const floatAmp = compact ? 0.03 : 0.07;
+    head.position.y = floatAmp * Math.sin(0.9 * clock.elapsedTime);
     scene.environmentRotation.y += 0.15 * dt;
   } else {
     head.position.y = 0;
