@@ -87,13 +87,17 @@ h1,h2,h3,.work-head,.c-name,.cap > span:first-child{text-transform:uppercase}
 .thumbs.is-ready{pointer-events:auto}
 .thumbs.is-dealing{pointer-events:none}
 .thumb{
+  position:relative;
   width:clamp(52px,6vw,64px); aspect-ratio:1; border-radius:4px;
-  background:var(--tile); display:block; overflow:hidden; flex:none;
+  background:#e8e8e8; display:block; overflow:hidden; flex:none;
   transform-origin:center center; will-change:transform;
 }
 .thumb:hover{text-decoration:none; filter:brightness(.96)}
-.thumb img,.thumb span{
-  display:block; width:100%; height:100%; object-fit:cover;
+.thumb-num{
+  position:absolute; top:5px; right:6px;
+  font-size:9px; line-height:1; font-weight:500;
+  font-variant-numeric:tabular-nums; letter-spacing:.02em;
+  color:#111; pointer-events:none;
 }
 @media (prefers-reduced-motion:reduce){
   .thumbs{pointer-events:auto}
@@ -283,13 +287,14 @@ function coverImg(p, alt){
 
 var thumbs = document.getElementById("thumbs");
 var mediaStack = document.getElementById("media-stack");
-PROJECTS.forEach(function(p){
+PROJECTS.forEach(function(p, i){
   var a = document.createElement("a");
   a.className = "thumb";
   a.href = "#" + p.slug;
   a.title = p.name;
   a.setAttribute("aria-label", p.name);
-  a.innerHTML = coverImg(p) || "<span></span>";
+  var num = String(i + 1).padStart(2, "0");
+  a.innerHTML = '<span class="thumb-num" aria-hidden="true">'+num+'</span>';
   thumbs.appendChild(a);
 
   var m = document.createElement("a");
