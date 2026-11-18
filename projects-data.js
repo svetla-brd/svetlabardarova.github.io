@@ -1,11 +1,19 @@
 window.PROJECTS = [
   {
     "slug": "nuklai-forms",
-    "name": "Nuklai - Forms App",
+    "name": "Nuklai Forms",
     "year": "2024",
     "services": "Product Design, Branding",
     "cover": "assets/covers/nuklai-forms.png",
-    "desc": "Nuklai provides an innovative solution for analyzing data collected through app-generated forms. The platform consolidates form submissions into comprehensive datasets, which users can subscribe to for ongoing insights and analysis.",
+    "eyebrow": "Case study · Product design",
+    "headline": "Nuklai Forms: a no-code form builder that lets anyone collect and reward community data",
+    "desc": "I designed the tool end to end, from research and flows to high-fidelity UI and testing, so non-technical creators can launch a rewarded data-collection form in minutes.",
+    "meta": [
+      {"label": "Role", "value": "Product Designer: UX research, product design, branding"},
+      {"label": "Timeline", "value": "April – August 2024"},
+      {"label": "Team", "value": "PM, engineers, community lead, me as sole designer"},
+      {"label": "Platform", "value": "Web, desktop-first"}
+    ],
     "gallery": [
       "https://cdn.myportfolio.com/c1feb494-2211-42d3-95ed-54a318116a0c/d841b8d7-966a-459d-9fe2-f11ed21db249_rw_3840.png?h=6f355a54938514cb3d498ea36c7a5239",
       "https://cdn.myportfolio.com/c1feb494-2211-42d3-95ed-54a318116a0c/a13b9ca7-e516-4875-bb36-f41751e9c1e9_rw_1920.png?h=039e295bee863c734eda12e357df75c1",
@@ -22,14 +30,176 @@ window.PROJECTS = [
       "https://cdn.myportfolio.com/c1feb494-2211-42d3-95ed-54a318116a0c/ef68bb5e-d727-4f59-99c1-88507cc2abfb_rw_3840.png?h=182f5d46a744eada6eb36eb1c3161a93",
       "https://cdn.myportfolio.com/c1feb494-2211-42d3-95ed-54a318116a0c/dedad77e-b89e-4dc5-8730-37594a3f0076_rw_3840.png?h=3c5991b692e2fd0d6f5c3c02c1d4df14"
     ],
-    "copy": [
-      "Objective & Goal:\nWith our web page builder (alternative name: form builder) we want to enable non technical users to gather data from their community in an easy way. In this way we enable influencers, other Web3 projects and businesses to fairly reward their user base for the data that they provide. Furthermore interesting contests could be created such as the bitcoin campaign that we have been running ourselves as Nuklai.",
-      "Services: UX Research, Product Design, Branding\nCategory: Forms Collection\nDate: 04.2024 - 08.2024",
-      "Research:\nThe research for our app included the creation of User Personas, which contributed to being more aware of the needs and cleared out what problems we're solving.",
-      "User-Friendly Interface: A simple, no-code admin panel allows non-technical users to create and manage forms without advanced skills.\nRewards and Incentives: Incentive options were integrated into the forms to motivate participants and enhance trust and engagement.\nCustomization and Branding: Users can personalize forms with branding elements (logos, banners, custom questions), helping them align forms with their brand for improved engagement.\nForm Configuration Flexibility: Varied question formats enable data collection suited to different goals, useful for both small businesses and larger projects.\n\nThese features make the product suitable for diverse, data-driven needs, promoting ease of use and interaction.",
-      "Flowchart:\nUser Flow showcasing the User's Journey through the App.",
-      "Wireframes:\nLow fidelity screens, clearing out the User flow and functionality. Onboarding, Create Form and Edit Form flow.",
-      "High Fidelity Screens:\nScreenshots from the application showcasing the process of onboarding, creation of a form and editing a form."
+    "sections": [
+      {
+        "id": "overview",
+        "label": "Overview",
+        "kicker": "01 · Overview",
+        "title": "What is Nuklai?",
+        "body": [
+          "Nuklai turns form submissions into datasets people can subscribe to for ongoing analysis. The form builder (also called the web page builder) is how data enters the platform: it lets influencers, Web3 projects and businesses gather data from their community and reward people fairly for sharing it. It also supports contests, like the Bitcoin campaign Nuklai ran itself."
+        ]
+      },
+      {
+        "id": "problem",
+        "label": "Problem",
+        "kicker": "02 · The problem",
+        "title": "Data collection with no easy way to reward people",
+        "body": [
+          "Creators and small teams wanted community data, and many wanted to incentivize it. But existing tools were built either for developers or for generic surveys, with no built-in rewards."
+        ],
+        "callout": "Design challenge: How might a non-technical creator launch a rewarded data-collection form in minutes, with no help and no technical knowledge?"
+      },
+      {
+        "id": "role",
+        "label": "Role",
+        "kicker": "03 · Role & collaboration",
+        "title": "One designer, a lot of tight loops",
+        "bullets": [
+          "With the PM: defined the MVP and cut anything that didn’t serve the core flow: create, reward, publish.",
+          "With engineers: weekly feasibility check-ins. They flagged that fully custom reward logic would delay launch, so we shipped fewer reward options first and designed the UI to scale later.",
+          "With marketing: Nuklai’s Bitcoin campaign ran on the builder, giving us a real use case and fast feedback."
+        ]
+      },
+      {
+        "id": "research",
+        "label": "Research",
+        "kicker": "04 · Research",
+        "title": "Starting with people, not screens",
+        "body": [
+          "I combined stakeholder conversations, a short community survey and informal interviews with creators and community managers. From this I built user personas covering goals, technical comfort and frustrations."
+        ],
+        "media": [
+          {"src": "assets/nuklai-forms/research.png", "caption": "Personas and key survey findings."},
+          {"src": "assets/nuklai-forms/flow.png", "caption": "Persona 1: Social Media Influencer."},
+          {"src": "assets/nuklai-forms/wire-onboarding.png", "caption": "Persona 2: Web3 Project Manager."},
+          {"src": "assets/nuklai-forms/wire-create.png", "caption": "Persona 3: Small Business Owner."},
+          {"src": "assets/nuklai-forms/wire-edit.png", "caption": "Persona 4: Developer."}
+        ],
+        "table": {
+          "headers": ["Insight", "Design decision"],
+          "rows": [
+            ["Creators had never used a builder with rewards and feared setting them up wrong", "Rewards sit in the main creation flow, with plain-language guidance"],
+            ["Non-technical users were put off by jargon and complex settings", "No-code admin panel, simple labels, sensible defaults"],
+            ["Creators cared about looking professional and on-brand", "Customization for logos, banners and custom questions"],
+            ["Needs ranged from quick polls to large campaigns", "Flexible question types and form configuration"]
+          ]
+        }
+      },
+      {
+        "id": "experience",
+        "label": "Experience",
+        "kicker": "05 · Defining the experience",
+        "title": "Mapping the journey before drawing screens",
+        "body": [
+          "I mapped the full user flow from first sign-in to a published, reward-enabled form. This exposed an early risk: users had to make reward decisions before they’d seen their form, which felt abstract and stressful."
+        ],
+        "bodyAfter": [
+          "In low-fidelity wireframes I explored two structures for creating and editing: a step-by-step wizard and a single-page builder. I chose a guided flow for creation, because newcomers needed hand-holding, and a flexible single view for editing, where returning users want speed."
+        ]
+      },
+      {
+        "id": "wireframes",
+        "label": "Wireframes",
+        "kicker": "05b · Wireframes",
+        "title": "Low-fidelity screens clarifying flow and functionality",
+        "media": [
+          {"src": "assets/nuklai-forms/after-test.png", "caption": "After testing"},
+          {"src": "assets/nuklai-forms/hi-onboarding.png", "caption": "Onboarding: first-time setup and orientation."},
+          {"src": "assets/nuklai-forms/hi-create.png", "caption": "Create form: guided steps including rewards and branding."}
+        ]
+      },
+      {
+        "id": "decisions",
+        "label": "Decisions",
+        "kicker": "06 · Key decisions",
+        "title": "Three calls that shaped the product",
+        "decisions": [
+          {
+            "title": "Guided creation, flexible editing",
+            "options": "One wizard for everything, or one dense builder.",
+            "why": "First-timers needed structure; returning users needed speed.",
+            "tradeoff": "Two patterns to design and maintain."
+          },
+          {
+            "title": "Rewards inside the form flow",
+            "options": "A separate settings area, or part of creation.",
+            "why": "Incentives were the main reason creators wanted the product.",
+            "tradeoff": "A longer flow, offset by smart defaults."
+          },
+          {
+            "title": "Simple reward options for v1",
+            "options": "Many configurable types, or a small set.",
+            "why": "Engineering feasibility, and too many options would overwhelm newcomers.",
+            "tradeoff": "Less flexibility at launch, with a path to expand."
+          }
+        ]
+      },
+      {
+        "id": "testing",
+        "label": "Testing",
+        "kicker": "07 · Testing & iteration",
+        "title": "What test participants taught us",
+        "body": [
+          "I tested the prototype with people matching our personas. Their task: create and publish a rewarded form."
+        ],
+        "split": {
+          "left": {
+            "title": "What we found",
+            "items": [
+              "Several participants missed or misunderstood the reward step",
+              "Unclear whether a form was a draft or already live",
+              "Question-type names confused people new to form tools"
+            ]
+          },
+          "right": {
+            "title": "What I changed",
+            "items": [
+              "Clearer reward step with a short explanation and a participant-view preview",
+              "Explicit draft/published status with a confirmation before going live",
+              "Plain-language question types with small examples"
+            ]
+          }
+        },
+        "media": [
+          {"src": "assets/nuklai-forms/before-test.png", "caption": "Before testing"}
+        ]
+      },
+      {
+        "id": "design",
+        "label": "Design",
+        "kicker": "08 · Final design",
+        "title": "High-fidelity screens",
+        "body": [
+          "The three core flows as shipped: onboarding, creating a form and editing a form."
+        ],
+        "media": [
+          {"src": "assets/nuklai-forms/hi-edit.png", "caption": "Edit form: flexible view for returning users."},
+          {"src": "assets/nuklai-forms/hi-extra1.png"},
+          {"src": "assets/nuklai-forms/hi-extra2.png"},
+          {"src": "assets/nuklai-forms/hi-extra3.png"},
+          {"src": "assets/nuklai-forms/hi-extra4.png"}
+        ]
+      },
+      {
+        "id": "outcome",
+        "label": "Outcome",
+        "kicker": "09 · Outcome & learnings",
+        "title": "Shipped, and used for a real campaign",
+        "body": [
+          "The builder shipped and powered Nuklai’s own Bitcoin campaign, the first real-world test of the product."
+        ],
+        "bullets": [
+          "Testing the reward flow earlier would have saved a design iteration.",
+          "Designing alongside engineering kept scope realistic and avoided rework.",
+          "For a new kind of product, plain language mattered as much as UI."
+        ],
+        "cta": {
+          "text": "Want to talk through the process?",
+          "linkLabel": "Get in touch",
+          "href": "mailto:your@email.com"
+        }
+      }
     ]
   },
   {
