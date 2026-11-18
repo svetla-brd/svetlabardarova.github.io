@@ -69,8 +69,11 @@ window.PROJECTS = [
         "body": [
           "I combined stakeholder conversations, a short community survey and informal interviews with creators and community managers. From this I built user personas covering goals, technical comfort and frustrations."
         ],
+        "mediaBefore": [
+          {"src": "assets/nuklai-forms/research.png", "caption": "Personas and key survey findings."}
+        ],
+        "mediaCols": 2,
         "media": [
-          {"src": "assets/nuklai-forms/research.png", "caption": "Personas and key survey findings."},
           {"src": "assets/nuklai-forms/flow.png", "caption": "Persona 1: Social Media Influencer."},
           {"src": "assets/nuklai-forms/wire-onboarding.png", "caption": "Persona 2: Web3 Project Manager."},
           {"src": "assets/nuklai-forms/wire-create.png", "caption": "Persona 3: Small Business Owner."},
@@ -87,12 +90,15 @@ window.PROJECTS = [
         }
       },
       {
-        "id": "experience",
-        "label": "Experience",
-        "kicker": "05 · Defining the experience",
+        "id": "flow",
+        "label": "User flow",
+        "kicker": "05 · User flow",
         "title": "Mapping the journey before drawing screens",
         "body": [
           "I mapped the full user flow from first sign-in to a published, reward-enabled form. This exposed an early risk: users had to make reward decisions before they’d seen their form, which felt abstract and stressful."
+        ],
+        "media": [
+          {"src": "assets/nuklai-forms/before-test.png", "caption": "Information architecture: create, edit, and publish."}
         ],
         "bodyAfter": [
           "In low-fidelity wireframes I explored two structures for creating and editing: a step-by-step wizard and a single-page builder. I chose a guided flow for creation, because newcomers needed hand-holding, and a flexible single view for editing, where returning users want speed."
@@ -103,8 +109,9 @@ window.PROJECTS = [
         "label": "Wireframes",
         "kicker": "05b · Wireframes",
         "title": "Low-fidelity screens clarifying flow and functionality",
+        "mediaCols": 1,
         "media": [
-          {"src": "assets/nuklai-forms/after-test.png", "caption": "After testing"},
+          {"src": "assets/nuklai-forms/after-test.png", "caption": "After testing", "className": "is-phones-4"},
           {"src": "assets/nuklai-forms/hi-onboarding.png", "caption": "Onboarding: first-time setup and orientation."},
           {"src": "assets/nuklai-forms/hi-create.png", "caption": "Create form: guided steps including rewards and branding."}
         ]
@@ -160,10 +167,7 @@ window.PROJECTS = [
               "Plain-language question types with small examples"
             ]
           }
-        },
-        "media": [
-          {"src": "assets/nuklai-forms/before-test.png", "caption": "Before testing"}
-        ]
+        }
       },
       {
         "id": "design",
