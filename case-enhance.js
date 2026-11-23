@@ -4,11 +4,33 @@
 
   var caseSpy = null;
   var lenis = null;
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  if (
-    window.Lenis &&
-    !window.matchMedia("(prefers-reduced-motion: reduce)").matches
-  ) {
+  // Soft scroll reveals for sections after the hero (page load handled in CSS)
+  (function bindSectionReveal() {
+    if (reduceMotion || !("IntersectionObserver" in window)) return;
+    var sections = Array.prototype.slice.call(
+      caseRoot.querySelectorAll(".c-section")
+    );
+    if (sections.length < 2) return;
+    var io = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-in");
+          io.unobserve(entry.target);
+        });
+      },
+      { rootMargin: "0px 0px -10% 0px", threshold: 0.1 }
+    );
+    sections.forEach(function (sec, i) {
+      if (i === 0) return;
+      sec.classList.add("is-reveal");
+      io.observe(sec);
+    });
+  })();
+
+  if (window.Lenis && !reduceMotion) {
     lenis = new Lenis({
       autoRaf: true,
       lerp: 0.1,

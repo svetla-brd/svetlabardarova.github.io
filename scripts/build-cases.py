@@ -287,23 +287,23 @@ def render_page(p, projects, socials: str) -> str:
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.css">
-<link rel="stylesheet" href="../site.css">
+<link rel="stylesheet" href="../site.css?v=nav-blend-3">
 </head>
 <body class="case-open">
 <nav class="case-nav" id="case-nav" aria-label="Case study">
+  <a class="home case-nav-blend" href="../" aria-label="Home">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20h5v-6h4v6h5V9.5"/></svg>
+  </a>
   <div class="case-nav-end">
     {socials}
     <a class="resume case-nav-blend" href="#" aria-label="Resume">Resume</a>
-    <a class="home case-nav-blend" href="../" aria-label="Home">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20h5v-6h4v6h5V9.5"/></svg>
-    </a>
   </div>
 </nav>
 <article id="case">
 {render_case_body(p, projects)}
 </article>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.min.js"></script>
-<script src="../case-enhance.js"></script>
+<script src="../case-enhance.js?v=nav-blend-3"></script>
 </body>
 </html>
 """

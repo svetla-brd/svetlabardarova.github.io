@@ -86,7 +86,7 @@ h1,h2,h3,.work-head,.c-name,.cap > span:first-child{text-transform:uppercase}
 
 .case-nav{
   position:sticky; top:0; z-index:30;
-  display:flex; align-items:center; justify-content:flex-end;
+  display:flex; align-items:center; justify-content:space-between;
   gap:18px;
   min-height:44px;
   padding:clamp(18px,2.5vw,28px) var(--gutter) 10px;
@@ -97,15 +97,16 @@ h1,h2,h3,.work-head,.c-name,.cap > span:first-child{text-transform:uppercase}
 .case-nav[hidden]{display:none !important}
 .case-nav-end{
   display:flex; align-items:center; justify-content:flex-end;
-  gap:18px; pointer-events:auto;
+  gap:18px; pointer-events:auto; margin-left:auto;
 }
 .case-nav .socials,
 .case-nav .resume,
 .case-nav .home{pointer-events:auto}
-.case-nav .socials a,
+/* Fallback (no blend): homepage-like dark */
+.case-nav .socials a{color:#7A7A7A}
+.case-nav .socials a:hover{color:var(--fg); opacity:1; text-decoration:none}
 .case-nav .resume,
-.case-nav .home{color:#111}
-.case-nav .socials a:hover,
+.case-nav .home{color:var(--fg)}
 .case-nav .resume:hover,
 .case-nav .home:hover{opacity:.7; text-decoration:none}
 .case-nav .home{
@@ -116,14 +117,40 @@ h1,h2,h3,.work-head,.c-name,.cap > span:first-child{text-transform:uppercase}
   stroke-width:1.75; stroke-linecap:round; stroke-linejoin:round;
 }
 @supports (mix-blend-mode: difference){
-  /* Blend the sticky layer itself so it samples page content underneath */
+  /* Blend the sticky nav as a group so Home/Resume invert against page
+     (white source → dark on light, like homepage Resume) */
   .case-nav{mix-blend-mode:difference}
-  .case-nav .socials a,
   .case-nav .resume,
   .case-nav .home{color:#fff}
+  /* Socials: pre-compensate so after difference they still read as homepage gray */
+  .case-nav .socials a{color:#858585}
+  .case-nav .socials a:hover{color:#eee; opacity:1}
 }
 body.case-open{overflow:auto; overflow-x:auto}
 body.case-open #case{padding-top:clamp(28px,4vw,48px)}
+
+/* Case page load: soft fade-up (Honig-like entrance)
+   Don't opacity-animate Home/Resume — that isolates mix-blend-mode:difference */
+@keyframes case-enter{
+  from{opacity:0; transform:translateY(18px)}
+  to{opacity:1; transform:none}
+}
+body.case-open .case-nav .socials{
+  animation:case-enter .65s cubic-bezier(.22,1,.36,1) both;
+}
+body.case-open #case{
+  animation:case-enter .8s cubic-bezier(.22,1,.36,1) .06s both;
+}
+/* Scroll reveals for sections below the first */
+body.case-open #case .c-section.is-reveal{
+  opacity:0;
+  transform:translateY(16px);
+  transition:opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1);
+}
+body.case-open #case .c-section.is-reveal.is-in{
+  opacity:1;
+  transform:none;
+}
 
 #case{padding:clamp(48px,7vw,80px) var(--gutter) 64px; box-sizing:border-box}
 .c-shell{
