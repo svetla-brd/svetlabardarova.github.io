@@ -250,16 +250,23 @@ def render_structured_section(s):
             right = row[1] if len(row) > 1 else ""
             rows_html.append(
                 f'<div class="c-insight-row">'
-                f'<div class="c-insight-block">'
-                f'<p class="c-insight-label">{esc(h0)}</p>'
+                f'<div class="c-insight-block is-insight">'
+                f'<p class="c-insight-label">'
+                f'<span class="c-insight-ico" aria-hidden="true">'
+                f'<svg viewBox="0 0 24 24"><path d="M9 18h6"/><path d="M10 21h4"/>'
+                f'<path d="M12 3a6 6 0 0 0-3.5 10.8c.7.6 1.1 1.4 1.2 2.2h4.6c.1-.8.5-1.6 1.2-2.2A6 6 0 0 0 12 3Z"/>'
+                f"</svg></span>{esc(h0)}</p>"
                 f'<p class="c-insight-text">{esc(left)}</p>'
                 f"</div>"
                 f'<span class="c-insight-arrow" aria-hidden="true">'
                 f'<svg class="is-right" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>'
                 f'<svg class="is-down" viewBox="0 0 24 24"><path d="M12 5v14"/><path d="m6 13 6 6 6-6"/></svg>'
                 f"</span>"
-                f'<div class="c-insight-block">'
-                f'<p class="c-insight-label">{esc(h1)}</p>'
+                f'<div class="c-insight-block is-decision">'
+                f'<p class="c-insight-label">'
+                f'<span class="c-insight-ico" aria-hidden="true">'
+                f'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/>'
+                f'<path d="m8.5 12.5 2.5 2.5 4.5-5"/></svg></span>{esc(h1)}</p>'
                 f'<p class="c-insight-text">{esc(right)}</p>'
                 f"</div>"
                 f"</div>"
@@ -400,7 +407,7 @@ def render_page(p, projects, socials: str) -> str:
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.css">
-<link rel="stylesheet" href="../site.css?v=onboarding-21">
+<link rel="stylesheet" href="../site.css?v=onboarding-26">
 </head>
 <body class="case-open">
 <nav class="case-nav" id="case-nav" aria-label="Case study">
@@ -416,7 +423,7 @@ def render_page(p, projects, socials: str) -> str:
 {render_case_body(p, projects)}
 </article>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.min.js"></script>
-<script src="../case-enhance.js?v=onboarding-21"></script>
+<script src="../case-enhance.js?v=onboarding-26"></script>
 </body>
 </html>
 """

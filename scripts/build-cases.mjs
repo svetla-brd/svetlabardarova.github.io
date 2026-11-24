@@ -349,8 +349,12 @@ function renderStructuredSection(s) {
           var right = row[1] || "";
           return (
             '<div class="c-insight-row">' +
-            '<div class="c-insight-block">' +
+            '<div class="c-insight-block is-insight">' +
             '<p class="c-insight-label">' +
+            '<span class="c-insight-ico" aria-hidden="true">' +
+            '<svg viewBox="0 0 24 24"><path d="M9 18h6"/><path d="M10 21h4"/>' +
+            '<path d="M12 3a6 6 0 0 0-3.5 10.8c.7.6 1.1 1.4 1.2 2.2h4.6c.1-.8.5-1.6 1.2-2.2A6 6 0 0 0 12 3Z"/>' +
+            "</svg></span>" +
             escapeHtml(h0) +
             '</p><p class="c-insight-text">' +
             escapeHtml(left) +
@@ -359,8 +363,11 @@ function renderStructuredSection(s) {
             '<svg class="is-right" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>' +
             '<svg class="is-down" viewBox="0 0 24 24"><path d="M12 5v14"/><path d="m6 13 6 6 6-6"/></svg>' +
             "</span>" +
-            '<div class="c-insight-block">' +
+            '<div class="c-insight-block is-decision">' +
             '<p class="c-insight-label">' +
+            '<span class="c-insight-ico" aria-hidden="true">' +
+            '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/>' +
+            '<path d="m8.5 12.5 2.5 2.5 4.5-5"/></svg></span>' +
             escapeHtml(h1) +
             '</p><p class="c-insight-text">' +
             escapeHtml(right) +
@@ -606,7 +613,7 @@ function renderPage(p) {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.css">
-<link rel="stylesheet" href="../site.css?v=onboarding-21">
+<link rel="stylesheet" href="../site.css?v=onboarding-26">
 </head>
 <body class="case-open">
 <nav class="case-nav" id="case-nav" aria-label="Case study">
@@ -622,7 +629,7 @@ function renderPage(p) {
 ${renderCaseBody(p)}
 </article>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.min.js"></script>
-<script src="../case-enhance.js?v=onboarding-21"></script>
+<script src="../case-enhance.js?v=onboarding-26"></script>
 </body>
 </html>
 `;
