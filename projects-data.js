@@ -298,7 +298,21 @@ window.PROJECTS = [
         ],
         "media": [
           {"src": "assets/nuklai-forms/hi-edit.png", "caption": "Edit form: flexible view for returning users."},
-          {"src": "assets/nuklai-forms/hi-extra1.png"},
+          {
+            "ui": "onboarding",
+            "hero": "assets/nuklai-forms/ob-hero.png",
+            "label": "(A) Onboarding",
+            "aboutTitle": "About",
+            "about": "Our forms app onboarding process ensures a quick and secure setup by offering sign-in options via Google, Microsoft, or email. This streamlined approach allows users to immediately access a personalized Dashboard for creating, customizing, and managing forms. As a result, we achieved faster user adoption rates and higher overall satisfaction.",
+            "phones": [
+              {"src": "assets/nuklai-forms/ob-splash.png?v=5", "caption": "Splash"},
+              {"src": "assets/nuklai-forms/ob-get-started.png?v=6", "caption": "Welcome"},
+              {"src": "assets/nuklai-forms/ob-signup.png?v=5", "caption": "Sign up"},
+              {"src": "assets/nuklai-forms/ob-signup-email.png?v=5", "caption": "Email"},
+              {"src": "assets/nuklai-forms/ob-verify.png?v=5", "caption": "Verify"},
+              {"src": "assets/nuklai-forms/ob-dashboard.png?v=3", "caption": "Dashboard"}
+            ]
+          },
           {"src": "assets/nuklai-forms/hi-extra2.png"},
           {"src": "assets/nuklai-forms/hi-extra3.png"},
           {"src": "assets/nuklai-forms/hi-extra4.png"}

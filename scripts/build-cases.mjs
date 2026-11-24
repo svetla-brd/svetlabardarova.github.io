@@ -120,6 +120,86 @@ function card(p) {
   );
 }
 
+function renderOnboardingUi(m) {
+  var hero = pageAsset(m.hero || "");
+  var about = m.about || "";
+  var phoneList = m.phones || [];
+  var startI = 0;
+  phoneList.forEach(function (p, i) {
+    if ((p.caption || "").trim().toLowerCase() === "welcome") startI = i;
+  });
+  var phones = phoneList
+    .map(function (p) {
+      var src = pageAsset(p.src || "");
+      var cap = p.caption || "";
+      return (
+        '<figure class="c-phone" data-caption="' +
+        escapeAttr(cap) +
+        '">' +
+        '<div class="c-phone-shot"><img src="' +
+        escapeAttr(src) +
+        '" alt="" loading="eager" decoding="async"></div>' +
+        (cap
+          ? '<figcaption class="c-phone-cap">' + escapeHtml(cap) + "</figcaption>"
+          : "") +
+        "</figure>"
+      );
+    })
+    .join("");
+  var dots = phoneList
+    .map(function (p, i) {
+      var cap = p.caption || "Screen " + (i + 1);
+      return (
+        '<button type="button" class="c-ui-dot' +
+        (i === startI ? " is-active" : "") +
+        '" data-index="' +
+        i +
+        '" aria-label="' +
+        escapeAttr(cap) +
+        '"></button>'
+      );
+    })
+    .join("");
+  var startCap =
+    (phoneList[startI] && phoneList[startI].caption) || "";
+  return (
+    '<div class="c-ui-show is-onboarding">' +
+    '<div class="c-ui-hero"><img src="' +
+    escapeAttr(hero) +
+    '" alt="" loading="eager" decoding="async"></div>' +
+    '<div class="c-ui-about"><div class="c-ui-about-head">' +
+    "<h3>" +
+    escapeHtml(m.label || "(A) Onboarding") +
+    "</h3><h3>" +
+    escapeHtml(m.aboutTitle || "About") +
+    "</h3></div>" +
+    '<p class="c-ui-about-body">' +
+    escapeHtml(about) +
+    "</p></div>" +
+    '<div class="c-ui-carousel" data-start="' +
+    startI +
+    '">' +
+    '<div class="c-ui-phones-viewport">' +
+    '<div class="c-ui-phones">' +
+    phones +
+    "</div></div>" +
+    '<p class="c-ui-slide-title" aria-live="polite">' +
+    escapeHtml(startCap) +
+    "</p>" +
+    '<div class="c-ui-carousel-nav" aria-label="Onboarding screens">' +
+    '<button type="button" class="c-ui-arrow c-ui-prev" aria-label="Previous screen">' +
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg>' +
+    "</button>" +
+    '<div class="c-ui-dots" role="tablist">' +
+    dots +
+    "</div>" +
+    '<button type="button" class="c-ui-arrow c-ui-next" aria-label="Next screen">' +
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>' +
+    "</button>" +
+    "</div></div></div>"
+  );
+}
+
 function renderMedia(items, cols) {
   if (!items || !items.length) return "";
   var cls = "c-media";
@@ -134,6 +214,9 @@ function renderMedia(items, cols) {
     '">' +
     items
       .map(function (m) {
+        if (m && typeof m === "object" && m.ui === "onboarding") {
+          return renderOnboardingUi(m);
+        }
         var src = typeof m === "string" ? m : m.src;
         var caption = typeof m === "string" ? "" : m.caption || "";
         var extra =
@@ -514,7 +597,7 @@ function renderPage(p) {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.css">
-<link rel="stylesheet" href="../site.css?v=findings-11">
+<link rel="stylesheet" href="../site.css?v=onboarding-18">
 </head>
 <body class="case-open">
 <nav class="case-nav" id="case-nav" aria-label="Case study">
@@ -530,7 +613,7 @@ function renderPage(p) {
 ${renderCaseBody(p)}
 </article>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.min.js"></script>
-<script src="../case-enhance.js?v=findings-11"></script>
+<script src="../case-enhance.js?v=onboarding-18"></script>
 </body>
 </html>
 `;
