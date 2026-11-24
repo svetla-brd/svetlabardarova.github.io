@@ -122,6 +122,48 @@ def render_media(items, cols=None):
     return f'<div class="{cls}">' + "".join(bits) + "</div>"
 
 
+def render_finding_card(card, kind):
+    shared = " is-shared" if card.get("shared") else ""
+    if kind == "personas":
+        return (
+            f'<article class="c-finding-card is-persona">'
+            f'<h3>{esc(card.get("name") or "")}</h3>'
+            f'<p class="c-finding-role">{esc(card.get("role") or "")}</p>'
+            f'<p class="c-finding-quote">{esc(card.get("quote") or "")}</p>'
+            f"</article>"
+        )
+    items = card.get("items") or []
+    return (
+        f'<article class="c-finding-card{shared}">'
+        + ('<span class="c-finding-star" aria-label="Shared by at least 3 personas">★</span>' if card.get("shared") else "")
+        + f'<h3>{esc(card.get("title") or "")}</h3>'
+        + "<ul>"
+        + "".join(f"<li>{esc(item)}</li>" for item in items)
+        + "</ul>"
+        + (f'<p class="c-finding-who">{esc(card.get("who") or "")}</p>' if card.get("who") else "")
+        + "</article>"
+    )
+
+
+def render_findings(findings):
+    if not findings:
+        return ""
+    panels = []
+    for panel in findings:
+        kind = panel.get("kind") or "pain"
+        cards = "".join(render_finding_card(c, kind) for c in panel.get("cards") or [])
+        panels.append(
+            f'<div class="c-finding kind-{esc(kind)}">'
+            f'<header class="c-finding-head">'
+            f'<p class="c-finding-pill">{esc(panel.get("title") or "")}</p>'
+            f'<p class="c-finding-sub">{esc(panel.get("subtitle") or "")}</p>'
+            f"</header>"
+            f'<div class="c-finding-grid">{cards}</div>'
+            f"</div>"
+        )
+    return '<div class="c-findings">' + "".join(panels) + "</div>"
+
+
 def render_structured_section(s):
     html = f'<section class="c-section" id="{esc(s["id"])}">'
     if s.get("kicker"):
@@ -142,6 +184,7 @@ def render_structured_section(s):
         )
     else:
         html += render_media(s.get("media"), s.get("mediaCols"))
+    html += render_findings(s.get("findings"))
     if s.get("table") and s["table"].get("rows"):
         headers = s["table"].get("headers") or []
         html += (
@@ -287,7 +330,7 @@ def render_page(p, projects, socials: str) -> str:
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.css">
-<link rel="stylesheet" href="../site.css?v=nav-blend-3">
+<link rel="stylesheet" href="../site.css?v=findings-11">
 </head>
 <body class="case-open">
 <nav class="case-nav" id="case-nav" aria-label="Case study">
@@ -303,7 +346,7 @@ def render_page(p, projects, socials: str) -> str:
 {render_case_body(p, projects)}
 </article>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.min.js"></script>
-<script src="../case-enhance.js?v=nav-blend-3"></script>
+<script src="../case-enhance.js?v=findings-11"></script>
 </body>
 </html>
 """

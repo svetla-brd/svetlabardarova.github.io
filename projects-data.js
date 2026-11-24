@@ -69,15 +69,134 @@ window.PROJECTS = [
         "body": [
           "I combined stakeholder conversations, a short community survey and informal interviews with creators and community managers. From this I built user personas covering goals, technical comfort and frustrations."
         ],
-        "mediaBefore": [
-          {"src": "assets/nuklai-forms/research.png", "caption": "Personas and key survey findings."}
-        ],
-        "mediaCols": 2,
-        "media": [
-          {"src": "assets/nuklai-forms/flow.png", "caption": "Persona 1: Social Media Influencer."},
-          {"src": "assets/nuklai-forms/wire-onboarding.png", "caption": "Persona 2: Web3 Project Manager."},
-          {"src": "assets/nuklai-forms/wire-create.png", "caption": "Persona 3: Small Business Owner."},
-          {"src": "assets/nuklai-forms/wire-edit.png", "caption": "Persona 4: Developer."}
+        "findings": [
+          {
+            "title": "Who we designed for",
+            "subtitle": "Four personas covering the range of creators.",
+            "kind": "personas",
+            "cards": [
+              {
+                "name": "Larissa",
+                "role": "Social Media Influencer",
+                "quote": "I want easy branded forms so I can collect follower feedback and reward them fairly, with no technical skills."
+              },
+              {
+                "name": "Liam",
+                "role": "Web3 Project Manager",
+                "quote": "I need secure, reward-driven forms that get community data fast, with clear setup and data integrity."
+              },
+              {
+                "name": "Sofia",
+                "role": "Small Business Owner",
+                "quote": "I want a simple branded tool to gather customer feedback so I can improve my products."
+              },
+              {
+                "name": "Alex",
+                "role": "Full Stack Developer",
+                "quote": "I want clear docs and customization in the open-source code so I can contribute safely and fast."
+              }
+            ]
+          },
+          {
+            "title": "User pain points",
+            "subtitle": "Grouped across personas. ★ = shared by at least 3 of the 4.",
+            "kind": "pain",
+            "cards": [
+              {
+                "title": "Not technical",
+                "shared": true,
+                "items": [
+                  "Limited technical skills for forms or pages",
+                  "Little technical knowledge for forms",
+                  "Non-tech feedback is hard to translate into design"
+                ],
+                "who": "Larissa · Sofia · Alex"
+              },
+              {
+                "title": "Rewards are hard to get right",
+                "items": [
+                  "Hard to compensate an audience fairly",
+                  "Hard to incentivize useful feedback",
+                  "Tight budgets for reward campaigns"
+                ],
+                "who": "Larissa · Sofia"
+              },
+              {
+                "title": "Too many tools",
+                "items": [
+                  "Separate tools for collection and rewards",
+                  "No easy tools for custom campaigns"
+                ],
+                "who": "Larissa · Liam"
+              },
+              {
+                "title": "Web3 setup is complex",
+                "items": [
+                  "Wallet and NFT integration is complex",
+                  "Hard to manage data securely at cost"
+                ],
+                "who": "Liam"
+              },
+              {
+                "title": "Speed vs. safety",
+                "items": [
+                  "Community contributions vs. code quality",
+                  "Speed vs. security and stability"
+                ],
+                "who": "Alex"
+              }
+            ]
+          },
+          {
+            "title": "Needs & motivations",
+            "subtitle": "What each persona wanted from a solution. ★ = shared by at least 3 of the 4.",
+            "kind": "needs",
+            "cards": [
+              {
+                "title": "Rewards built in",
+                "shared": true,
+                "items": [
+                  "Simple rewards, including crypto",
+                  "Wallet and NFT rewards",
+                  "Rewards that fit the brand"
+                ],
+                "who": "All four personas"
+              },
+              {
+                "title": "Branded, no developers",
+                "items": [
+                  "Create forms without needing developers",
+                  "A simple branded tool",
+                  "Usable by non-technical creators"
+                ],
+                "who": "Larissa · Sofia · Alex"
+              },
+              {
+                "title": "Transparency and trust",
+                "items": [
+                  "Stay transparent and trusted",
+                  "Fair, transparent participation rewards"
+                ],
+                "who": "Larissa · Liam"
+              },
+              {
+                "title": "Open source and clear docs",
+                "items": [
+                  "Open-source options for the community",
+                  "Clear docs and customization"
+                ],
+                "who": "Liam · Alex"
+              },
+              {
+                "title": "Data they can rely on",
+                "items": [
+                  "Data that drives better decisions",
+                  "Secure data with integrity"
+                ],
+                "who": "Sofia · Liam"
+              }
+            ]
+          }
         ],
         "table": {
           "headers": ["Insight", "Design decision"],

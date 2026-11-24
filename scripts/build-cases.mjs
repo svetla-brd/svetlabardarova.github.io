@@ -157,6 +157,74 @@ function renderMedia(items, cols) {
   );
 }
 
+function renderFindingCard(card, kind) {
+  if (kind === "personas") {
+    return (
+      '<article class="c-finding-card is-persona">' +
+      "<h3>" +
+      escapeHtml(card.name || "") +
+      '</h3><p class="c-finding-role">' +
+      escapeHtml(card.role || "") +
+      '</p><p class="c-finding-quote">' +
+      escapeHtml(card.quote || "") +
+      "</p></article>"
+    );
+  }
+  var shared = card.shared ? " is-shared" : "";
+  return (
+    '<article class="c-finding-card' +
+    shared +
+    '">' +
+    (card.shared
+      ? '<span class="c-finding-star" aria-label="Shared by at least 3 personas">★</span>'
+      : "") +
+    "<h3>" +
+    escapeHtml(card.title || "") +
+    "</h3><ul>" +
+    (card.items || [])
+      .map(function (item) {
+        return "<li>" + escapeHtml(item) + "</li>";
+      })
+      .join("") +
+    "</ul>" +
+    (card.who
+      ? '<p class="c-finding-who">' + escapeHtml(card.who) + "</p>"
+      : "") +
+    "</article>"
+  );
+}
+
+function renderFindings(findings) {
+  if (!findings || !findings.length) return "";
+  return (
+    '<div class="c-findings">' +
+    findings
+      .map(function (panel) {
+        var kind = panel.kind || "pain";
+        return (
+          '<div class="c-finding kind-' +
+          escapeAttr(kind) +
+          '">' +
+          '<header class="c-finding-head">' +
+          '<p class="c-finding-pill">' +
+          escapeHtml(panel.title || "") +
+          '</p><p class="c-finding-sub">' +
+          escapeHtml(panel.subtitle || "") +
+          "</p></header>" +
+          '<div class="c-finding-grid">' +
+          (panel.cards || [])
+            .map(function (c) {
+              return renderFindingCard(c, kind);
+            })
+            .join("") +
+          "</div></div>"
+        );
+      })
+      .join("") +
+    "</div>"
+  );
+}
+
 function renderStructuredSection(s) {
   var html = '<section class="c-section" id="' + escapeAttr(s.id) + '">';
   if (s.kicker) html += '<p class="c-kicker">' + escapeHtml(s.kicker) + "</p>";
@@ -185,6 +253,7 @@ function renderStructuredSection(s) {
   } else {
     html += renderMedia(s.media, s.mediaCols || null);
   }
+  html += renderFindings(s.findings);
   if (s.table && s.table.rows) {
     html +=
       '<table class="c-table"><thead><tr>' +
@@ -445,7 +514,7 @@ function renderPage(p) {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.css">
-<link rel="stylesheet" href="../site.css?v=nav-blend-3">
+<link rel="stylesheet" href="../site.css?v=findings-11">
 </head>
 <body class="case-open">
 <nav class="case-nav" id="case-nav" aria-label="Case study">
@@ -461,7 +530,7 @@ function renderPage(p) {
 ${renderCaseBody(p)}
 </article>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.min.js"></script>
-<script src="../case-enhance.js?v=nav-blend-3"></script>
+<script src="../case-enhance.js?v=findings-11"></script>
 </body>
 </html>
 `;

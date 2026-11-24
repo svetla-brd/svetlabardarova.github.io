@@ -265,7 +265,7 @@ body.case-open #case .c-section.is-reveal.is-in{
   margin-left:0;
   margin-right:0;
 }
-/* Research lead image: full column; personas: 2 per row */
+/* Research lead image: full column */
 #research .c-media{gap:clamp(16px,2.5vw,28px)}
 #research .c-media.cols-2,
 #research .c-media.cols-3{grid-template-columns:1fr 1fr}
@@ -274,6 +274,86 @@ body.case-open #case .c-section.is-reveal.is-in{
 #research .c-figure img{
   width:100%;
   max-width:100%;
+}
+/* Research findings: personas + grouped pain/needs panels */
+.c-findings{
+  margin:36px 0 0;
+  display:grid;
+  gap:clamp(20px,3vw,28px);
+}
+.c-finding{
+  padding:clamp(18px,2.5vw,28px);
+  border-radius:16px;
+  background:#f6f6f6;
+  display:grid;
+  gap:16px;
+}
+.c-finding-head{display:grid; gap:8px}
+.c-finding-pill{
+  margin:0; justify-self:start;
+  padding:8px 14px;
+  background:#fff; border-radius:999px;
+  font-size:clamp(14px,.25vw + 12.5px,16px);
+  font-weight:500; line-height:1.2;
+}
+.c-finding-sub{
+  margin:0; color:#555;
+  font-size:clamp(13px,.2vw + 12px,15px); line-height:1.4;
+}
+.c-finding-grid{
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0, 1fr));
+  gap:14px;
+  align-items:stretch;
+}
+.c-finding-card{
+  position:relative;
+  padding:clamp(16px,2vw,20px);
+  border-radius:12px;
+  background:#fff;
+  display:grid;
+  gap:10px;
+  align-content:start;
+  min-width:0;
+}
+.c-finding-card h3{
+  margin:0; padding-right:1.4em;
+  font-size:clamp(16px,.3vw + 14px,18px);
+  font-weight:500; text-transform:none; letter-spacing:-.01em; line-height:1.25;
+}
+.c-finding-role{
+  margin:0; color:var(--mute);
+  font-size:clamp(13px,.2vw + 12px,14px);
+}
+.c-finding-quote{
+  margin:0;
+  font-size:clamp(13px,.2vw + 12px,15px);
+  line-height:1.45; font-style:italic;
+}
+.c-finding-card ul{
+  margin:0; padding-left:1.15em; display:grid; gap:6px;
+}
+.c-finding-card li{
+  font-size:clamp(13px,.2vw + 12px,14px); line-height:1.4;
+}
+.c-finding-who{
+  margin:4px 0 0; color:var(--mute);
+  font-size:clamp(12px,.15vw + 11px,13px); line-height:1.35;
+}
+.c-finding-star{
+  position:absolute; top:12px; right:14px;
+  color:#e6b422; font-size:16px; line-height:1;
+}
+.c-finding.kind-pain .c-finding-card{background:#ddecee}
+.c-finding.kind-pain .c-finding-card.is-shared{background:#d9ecdd}
+.c-finding.kind-needs .c-finding-card{background:#dde9f1}
+.c-finding.kind-needs .c-finding-card.is-shared{background:#d9ecdd}
+.c-finding.kind-personas .c-finding-card{background:#fff}
+@media (max-width:800px){
+  .c-finding-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:560px){
+  .c-finding-grid{grid-template-columns:1fr}
 }
 /* Wireframes: stacked full column width */
 #wireframes .c-media{
