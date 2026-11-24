@@ -338,28 +338,37 @@ function renderStructuredSection(s) {
   }
   html += renderFindings(s.findings);
   if (s.table && s.table.rows) {
+    var headers = s.table.headers || [];
+    var h0 = headers[0] || "Insight";
+    var h1 = headers[1] || "Design decision";
     html +=
-      '<table class="c-table"><thead><tr>' +
-      (s.table.headers || [])
-        .map(function (h) {
-          return "<th>" + escapeHtml(h) + "</th>";
-        })
-        .join("") +
-      "</tr></thead><tbody>" +
+      '<div class="c-insights">' +
       s.table.rows
         .map(function (row) {
+          var left = row[0] || "";
+          var right = row[1] || "";
           return (
-            "<tr>" +
-            row
-              .map(function (cell) {
-                return "<td>" + escapeHtml(cell) + "</td>";
-              })
-              .join("") +
-            "</tr>"
+            '<div class="c-insight-row">' +
+            '<div class="c-insight-block">' +
+            '<p class="c-insight-label">' +
+            escapeHtml(h0) +
+            '</p><p class="c-insight-text">' +
+            escapeHtml(left) +
+            "</p></div>" +
+            '<span class="c-insight-arrow" aria-hidden="true">' +
+            '<svg class="is-right" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>' +
+            '<svg class="is-down" viewBox="0 0 24 24"><path d="M12 5v14"/><path d="m6 13 6 6 6-6"/></svg>' +
+            "</span>" +
+            '<div class="c-insight-block">' +
+            '<p class="c-insight-label">' +
+            escapeHtml(h1) +
+            '</p><p class="c-insight-text">' +
+            escapeHtml(right) +
+            "</p></div></div>"
           );
         })
         .join("") +
-      "</tbody></table>";
+      "</div>";
   }
   (s.bodyAfter || []).forEach(function (t) {
     html += '<p class="c-body">' + escapeHtml(t) + "</p>";
@@ -597,7 +606,7 @@ function renderPage(p) {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.css">
-<link rel="stylesheet" href="../site.css?v=onboarding-18">
+<link rel="stylesheet" href="../site.css?v=onboarding-21">
 </head>
 <body class="case-open">
 <nav class="case-nav" id="case-nav" aria-label="Case study">
@@ -613,7 +622,7 @@ function renderPage(p) {
 ${renderCaseBody(p)}
 </article>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.min.js"></script>
-<script src="../case-enhance.js?v=onboarding-18"></script>
+<script src="../case-enhance.js?v=onboarding-21"></script>
 </body>
 </html>
 `;

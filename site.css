@@ -126,8 +126,33 @@ h1,h2,h3,.work-head,.c-name,.cap > span:first-child{text-transform:uppercase}
   .case-nav .socials a{color:#858585}
   .case-nav .socials a:hover{color:#eee; opacity:1}
 }
-body.case-open{overflow:auto; overflow-x:auto}
+body.case-open{overflow-x:clip; overflow-y:auto}
 body.case-open #case{padding-top:clamp(28px,4vw,48px)}
+body.case-open .case-nav{
+  position:sticky;
+  top:0;
+  z-index:40;
+}
+/* Mobile: fixed nav — overflow-x:hidden on html/body breaks sticky */
+@media (max-width:900px){
+  html:has(body.case-open),
+  body.case-open{
+    overflow-x:clip;
+    overflow-y:auto;
+    height:auto;
+  }
+  body.case-open .case-nav{
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    width:100%;
+    z-index:50;
+  }
+  body.case-open #case{
+    padding-top:clamp(72px,14vw,96px);
+  }
+}
 
 /* Case page load: soft fade-up (Honig-like entrance)
    Don't opacity-animate Home/Resume — that isolates mix-blend-mode:difference */
@@ -240,6 +265,61 @@ body.case-open #case .c-section.is-reveal.is-in{
 }
 .c-table th{color:var(--mute); font-weight:500; width:50%}
 .c-table td + td,.c-table th + th{padding-left:20px}
+.c-insights{margin:36px 0 0; display:grid; gap:0}
+.c-insight-row{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  gap:clamp(12px,2vw,20px);
+  align-items:center;
+  padding:20px 0;
+  border-top:1px solid var(--line);
+}
+.c-insight-block{display:grid; gap:8px; align-content:start}
+.c-insight-label{
+  margin:0;
+  color:var(--mute);
+  font-size:clamp(13px,.2vw + 12px,15px);
+  font-weight:500;
+  line-height:1.3;
+}
+.c-insight-text{
+  margin:0;
+  font-size:clamp(15px,.3vw + 13px,17px);
+  line-height:1.5;
+}
+.c-insight-arrow{
+  display:grid;
+  place-items:center;
+  width:28px;
+  height:28px;
+  color:var(--mute);
+  flex:none;
+}
+.c-insight-arrow svg{
+  width:18px;
+  height:18px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.6;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.c-insight-arrow .is-down{display:none}
+@media (max-width:700px){
+  .c-insight-row{
+    grid-template-columns:1fr;
+    gap:10px;
+    padding:22px 0;
+    align-items:stretch;
+  }
+  .c-insight-arrow{
+    width:100%;
+    height:24px;
+    justify-self:center;
+  }
+  .c-insight-arrow .is-right{display:none}
+  .c-insight-arrow .is-down{display:block}
+}
 .c-decisions{margin:36px 0 0; display:grid; gap:8px}
 .c-decision{
   padding:22px 0; border-top:1px solid var(--line);
@@ -284,7 +364,7 @@ body.case-open #case .c-section.is-reveal.is-in{
 .c-finding{
   padding:clamp(18px,2.5vw,28px);
   border-radius:16px;
-  background:#f6f6f6;
+  background:#f1f1f1;
   display:grid;
   gap:16px;
 }
@@ -445,8 +525,8 @@ body.case-open #case .c-section.is-reveal.is-in{
   justify-self:end;
   width:100%;
   color:rgba(255,255,255,.72);
-  font-size:clamp(14px,.25vw + 12.5px,16px);
-  line-height:1.55;
+  font-size:clamp(16px,.35vw + 14px,18px);
+  line-height:1.65;
 }
 .c-ui-carousel{display:grid; gap:16px}
 .c-ui-phones-viewport{display:contents}
@@ -488,6 +568,15 @@ body.case-open #case .c-section.is-reveal.is-in{
 }
 /* Mobile only: transform carousel (infinite forward loop) */
 @media (max-width:640px){
+  .c-ui-show.is-onboarding{
+    width:calc(100% + 2 * var(--gutter));
+    max-width:none;
+    margin-left:calc(-1 * var(--gutter));
+    margin-right:calc(-1 * var(--gutter));
+    border-radius:0;
+    padding-left:var(--gutter);
+    padding-right:var(--gutter);
+  }
   .c-ui-carousel{gap:12px}
   .c-ui-slide-title{
     display:block;

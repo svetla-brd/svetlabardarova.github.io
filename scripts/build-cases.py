@@ -242,14 +242,29 @@ def render_structured_section(s):
     html += render_findings(s.get("findings"))
     if s.get("table") and s["table"].get("rows"):
         headers = s["table"].get("headers") or []
-        html += (
-            '<table class="c-table"><thead><tr>'
-            + "".join(f"<th>{esc(h)}</th>" for h in headers)
-            + "</tr></thead><tbody>"
-        )
+        h0 = headers[0] if len(headers) > 0 else "Insight"
+        h1 = headers[1] if len(headers) > 1 else "Design decision"
+        rows_html = []
         for row in s["table"]["rows"]:
-            html += "<tr>" + "".join(f"<td>{esc(c)}</td>" for c in row) + "</tr>"
-        html += "</tbody></table>"
+            left = row[0] if len(row) > 0 else ""
+            right = row[1] if len(row) > 1 else ""
+            rows_html.append(
+                f'<div class="c-insight-row">'
+                f'<div class="c-insight-block">'
+                f'<p class="c-insight-label">{esc(h0)}</p>'
+                f'<p class="c-insight-text">{esc(left)}</p>'
+                f"</div>"
+                f'<span class="c-insight-arrow" aria-hidden="true">'
+                f'<svg class="is-right" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>'
+                f'<svg class="is-down" viewBox="0 0 24 24"><path d="M12 5v14"/><path d="m6 13 6 6 6-6"/></svg>'
+                f"</span>"
+                f'<div class="c-insight-block">'
+                f'<p class="c-insight-label">{esc(h1)}</p>'
+                f'<p class="c-insight-text">{esc(right)}</p>'
+                f"</div>"
+                f"</div>"
+            )
+        html += '<div class="c-insights">' + "".join(rows_html) + "</div>"
     for t in s.get("bodyAfter") or []:
         html += f'<p class="c-body">{esc(t)}</p>'
     ma = s.get("mediaAfter")
@@ -385,7 +400,7 @@ def render_page(p, projects, socials: str) -> str:
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.css">
-<link rel="stylesheet" href="../site.css?v=onboarding-18">
+<link rel="stylesheet" href="../site.css?v=onboarding-21">
 </head>
 <body class="case-open">
 <nav class="case-nav" id="case-nav" aria-label="Case study">
@@ -401,7 +416,7 @@ def render_page(p, projects, socials: str) -> str:
 {render_case_body(p, projects)}
 </article>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.min.js"></script>
-<script src="../case-enhance.js?v=onboarding-18"></script>
+<script src="../case-enhance.js?v=onboarding-21"></script>
 </body>
 </html>
 """
