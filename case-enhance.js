@@ -165,7 +165,7 @@
       var autoTimer = null;
       var resumeTimer = null;
       var animating = false;
-      var AUTO_MS = 2800;
+      var AUTO_MS = 4200;
       var firstClone = null;
       var lastClone = null;
 
