@@ -597,6 +597,15 @@ body.case-open #case .c-section.is-reveal.is-in{
 }
 /* Mobile only: transform carousel (infinite forward loop) */
 @media (max-width:640px){
+  /* Snap each slide section into place; scroll between them for the rest */
+  html:has(body.case-open){
+    scroll-snap-type:y proximity;
+  }
+  #case .is-carousel-snap{
+    scroll-snap-align:start;
+    scroll-snap-stop:always;
+    scroll-margin-top:clamp(72px,14vw,96px);
+  }
   .c-ui-show.is-onboarding{
     width:calc(100% + 2 * var(--gutter));
     max-width:none;
@@ -621,8 +630,8 @@ body.case-open #case .c-section.is-reveal.is-in{
     display:block;
     overflow:hidden;
     width:100%;
-    /* Browser keeps vertical scroll; JS claims horizontal after axis lock */
-    touch-action:pan-y;
+    /* Horizontal handled by JS; vertical page scroll starts outside stage */
+    touch-action:none;
     -webkit-user-select:none;
     user-select:none;
   }

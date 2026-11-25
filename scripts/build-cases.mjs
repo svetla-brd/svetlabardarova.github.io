@@ -682,7 +682,7 @@ function renderPage(p) {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.css">
-<link rel="stylesheet" href="../site.css?v=carousel-axis-28">
+<link rel="stylesheet" href="../site.css?v=carousel-snap-29">
 </head>
 <body class="case-open">
 <nav class="case-nav" id="case-nav" aria-label="Case study">
@@ -698,7 +698,7 @@ function renderPage(p) {
 ${renderCaseBody(p)}
 </article>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.min.js"></script>
-<script src="../case-enhance.js?v=carousel-axis-28"></script>
+<script src="../case-enhance.js?v=carousel-snap-29"></script>
 </body>
 </html>
 `;
