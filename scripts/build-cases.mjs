@@ -200,6 +200,72 @@ function renderOnboardingUi(m) {
   );
 }
 
+function renderPhoneGroup(m) {
+  var phones = (m && m.phones) || [];
+  var caption = (m && m.caption) || "";
+  var label = caption || "Wireframe screens";
+  var startCap =
+    phones[0] && typeof phones[0] === "object" ? phones[0].caption || "" : "";
+  var shots = phones
+    .map(function (p) {
+      var src = typeof p === "string" ? p : p.src || "";
+      var cap = typeof p === "string" ? "" : p.caption || "";
+      return (
+        '<figure class="c-phone" data-caption="' +
+        escapeAttr(cap) +
+        '"><div class="c-phone-shot"><img src="' +
+        escapeAttr(pageAsset(src)) +
+        '" alt="" loading="lazy" decoding="async"></div>' +
+        (cap
+          ? '<figcaption class="c-phone-cap">' + escapeHtml(cap) + "</figcaption>"
+          : "") +
+        "</figure>"
+      );
+    })
+    .join("");
+  var dots = phones
+    .map(function (p, i) {
+      var cap =
+        typeof p === "string" ? "" : p.caption || "Screen " + (i + 1);
+      return (
+        '<button type="button" class="c-ui-dot' +
+        (i === 0 ? " is-active" : "") +
+        '" data-index="' +
+        i +
+        '" aria-label="' +
+        escapeAttr(cap) +
+        '"></button>'
+      );
+    })
+    .join("");
+  return (
+    '<figure class="c-wf-group"><div class="c-ui-carousel" data-start="0">' +
+    '<div class="c-ui-phones-viewport"><div class="c-ui-phones">' +
+    shots +
+    "</div></div>" +
+    '<p class="c-ui-slide-title" aria-live="polite">' +
+    escapeHtml(startCap) +
+    "</p>" +
+    '<div class="c-ui-carousel-nav" aria-label="' +
+    escapeAttr(label) +
+    '">' +
+    '<button type="button" class="c-ui-arrow c-ui-prev" aria-label="Previous screen">' +
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg>' +
+    "</button>" +
+    '<div class="c-ui-dots" role="tablist">' +
+    dots +
+    "</div>" +
+    '<button type="button" class="c-ui-arrow c-ui-next" aria-label="Next screen">' +
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>' +
+    "</button>" +
+    "</div></div>" +
+    (caption
+      ? '<figcaption class="c-figcap">' + escapeHtml(caption) + "</figcaption>"
+      : "") +
+    "</figure>"
+  );
+}
+
 function renderMedia(items, cols) {
   if (!items || !items.length) return "";
   var cls = "c-media";
@@ -216,6 +282,9 @@ function renderMedia(items, cols) {
       .map(function (m) {
         if (m && typeof m === "object" && m.ui === "onboarding") {
           return renderOnboardingUi(m);
+        }
+        if (m && typeof m === "object" && m.group === "phones") {
+          return renderPhoneGroup(m);
         }
         var src = typeof m === "string" ? m : m.src;
         var caption = typeof m === "string" ? "" : m.caption || "";
@@ -613,7 +682,7 @@ function renderPage(p) {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.css">
-<link rel="stylesheet" href="../site.css?v=onboarding-26">
+<link rel="stylesheet" href="../site.css?v=wireframes-27">
 </head>
 <body class="case-open">
 <nav class="case-nav" id="case-nav" aria-label="Case study">
@@ -629,7 +698,7 @@ function renderPage(p) {
 ${renderCaseBody(p)}
 </article>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.min.js"></script>
-<script src="../case-enhance.js?v=onboarding-26"></script>
+<script src="../case-enhance.js?v=wireframes-27"></script>
 </body>
 </html>
 `;

@@ -230,9 +230,42 @@ window.PROJECTS = [
         "title": "Low-fidelity screens clarifying flow and functionality",
         "mediaCols": 1,
         "media": [
-          {"src": "assets/nuklai-forms/after-test.png", "caption": "After testing", "className": "is-phones-4"},
-          {"src": "assets/nuklai-forms/hi-onboarding.png", "caption": "Onboarding: first-time setup and orientation."},
-          {"src": "assets/nuklai-forms/hi-create.png", "caption": "Create form: guided steps including rewards and branding."}
+          {
+            "group": "phones",
+            "caption": "After testing",
+            "phones": [
+              {"src": "assets/nuklai-forms/wireframes/wf-landing.png?v=wireframes-3", "caption": "Landing"},
+              {"src": "assets/nuklai-forms/wireframes/wf-signup-email.png?v=wireframes-3", "caption": "Email"},
+              {"src": "assets/nuklai-forms/wireframes/wf-signup-social.png?v=wireframes-3", "caption": "Social"},
+              {"src": "assets/nuklai-forms/wireframes/wf-verify.png?v=wireframes-3", "caption": "Verify"}
+            ]
+          },
+          {
+            "group": "phones",
+            "caption": "Onboarding: first-time setup and orientation.",
+            "phones": [
+              {"src": "assets/nuklai-forms/wireframes/wf-dashboard.png?v=wireframes-3", "caption": "Workspace"},
+              {"src": "assets/nuklai-forms/wireframes/wf-dashboard-1.png?v=wireframes-3", "caption": "Actions"},
+              {"src": "assets/nuklai-forms/wireframes/wf-schema-1.png?v=wireframes-3", "caption": "Schema"},
+              {"src": "assets/nuklai-forms/wireframes/wf-schema-2.png?v=wireframes-3", "caption": "Fields"},
+              {"src": "assets/nuklai-forms/wireframes/wf-schema-3.png?v=wireframes-5", "caption": "Edit field"}
+            ]
+          },
+          {
+            "group": "phones",
+            "caption": "Create form: guided steps including rewards and branding.",
+            "phones": [
+              {"src": "assets/nuklai-forms/wireframes/wf-create.png?v=wireframes-3", "caption": "Create"},
+              {"src": "assets/nuklai-forms/wireframes/wf-create-1.png?v=wireframes-3", "caption": "Details"},
+              {"src": "assets/nuklai-forms/wireframes/wf-create-2.png?v=wireframes-3", "caption": "Period"},
+              {"src": "assets/nuklai-forms/wireframes/wf-create-3.png?v=wireframes-3", "caption": "Dates"},
+              {"src": "assets/nuklai-forms/wireframes/wf-create-4.png?v=wireframes-3", "caption": "Calendar"},
+              {"src": "assets/nuklai-forms/wireframes/wf-builder-1.png?v=wireframes-3", "caption": "Branding"},
+              {"src": "assets/nuklai-forms/wireframes/wf-builder-2.png?v=wireframes-3", "caption": "Question"},
+              {"src": "assets/nuklai-forms/wireframes/wf-builder-3.png?v=wireframes-3", "caption": "Options"},
+              {"src": "assets/nuklai-forms/wireframes/wf-builder-4.png?v=wireframes-3", "caption": "Settings"}
+            ]
+          }
         ]
       },
       {

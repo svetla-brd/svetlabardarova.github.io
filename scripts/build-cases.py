@@ -148,6 +148,52 @@ def render_onboarding_ui(m):
     )
 
 
+def render_phone_group(m):
+    phones = m.get("phones") or []
+    caption = m.get("caption") or ""
+    label = caption or "Wireframe screens"
+    shots = []
+    dots = []
+    for i, p in enumerate(phones):
+        if isinstance(p, dict):
+            src = page_asset(p.get("src") or "")
+            cap = p.get("caption") or ""
+        else:
+            src = page_asset(p)
+            cap = ""
+        shots.append(
+            f'<figure class="c-phone" data-caption="{esc(cap)}">'
+            f'<div class="c-phone-shot">'
+            f'<img src="{esc(src)}" alt="" loading="lazy" decoding="async">'
+            f"</div>"
+            + (f'<figcaption class="c-phone-cap">{esc(cap)}</figcaption>' if cap else "")
+            + "</figure>"
+        )
+        dots.append(
+            f'<button type="button" class="c-ui-dot{" is-active" if i == 0 else ""}" '
+            f'data-index="{i}" aria-label="{esc(cap or f"Screen {i + 1}")}"></button>'
+        )
+    return (
+        f'<figure class="c-wf-group">'
+        f'<div class="c-ui-carousel" data-start="0">'
+        f'<div class="c-ui-phones-viewport">'
+        f'<div class="c-ui-phones">{"".join(shots)}</div>'
+        f"</div>"
+        f'<p class="c-ui-slide-title" aria-live="polite">{esc((phones[0].get("caption") if phones and isinstance(phones[0], dict) else "") or "")}</p>'
+        f'<div class="c-ui-carousel-nav" aria-label="{esc(label)}">'
+        f'<button type="button" class="c-ui-arrow c-ui-prev" aria-label="Previous screen">'
+        f'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg>'
+        f"</button>"
+        f'<div class="c-ui-dots" role="tablist">{"".join(dots)}</div>'
+        f'<button type="button" class="c-ui-arrow c-ui-next" aria-label="Next screen">'
+        f'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>'
+        f"</button>"
+        f"</div></div>"
+        + (f'<figcaption class="c-figcap">{esc(caption)}</figcaption>' if caption else "")
+        + "</figure>"
+    )
+
+
 def render_media(items, cols=None):
     if not items:
         return ""
@@ -161,6 +207,9 @@ def render_media(items, cols=None):
     for m in items:
         if isinstance(m, dict) and m.get("ui") == "onboarding":
             bits.append(render_onboarding_ui(m))
+            continue
+        if isinstance(m, dict) and m.get("group") == "phones":
+            bits.append(render_phone_group(m))
             continue
         if isinstance(m, str):
             src, caption, extra = m, "", ""
@@ -407,7 +456,7 @@ def render_page(p, projects, socials: str) -> str:
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.css">
-<link rel="stylesheet" href="../site.css?v=onboarding-26">
+<link rel="stylesheet" href="../site.css?v=wireframes-27">
 </head>
 <body class="case-open">
 <nav class="case-nav" id="case-nav" aria-label="Case study">
@@ -423,7 +472,7 @@ def render_page(p, projects, socials: str) -> str:
 {render_case_body(p, projects)}
 </article>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.min.js"></script>
-<script src="../case-enhance.js?v=onboarding-26"></script>
+<script src="../case-enhance.js?v=wireframes-27"></script>
 </body>
 </html>
 """

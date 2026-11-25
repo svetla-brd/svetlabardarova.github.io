@@ -465,34 +465,33 @@ body.case-open #case .c-section.is-reveal.is-in{
 @media (max-width:560px){
   .c-finding-grid{grid-template-columns:1fr}
 }
-/* Wireframes: stacked full column width */
+/* Wireframes: same phone sizing + wrap/carousel as onboarding UI */
 #wireframes .c-media{
   grid-template-columns:1fr;
   gap:clamp(28px,5vw,56px);
 }
 #wireframes .c-media.cols-2,
 #wireframes .c-media.cols-3{grid-template-columns:1fr}
-#wireframes .c-figure,
-#wireframes .c-figure .tile,
-#wireframes .c-figure img{
+#wireframes .c-wf-group{
+  margin:0;
   width:100%;
-  max-width:100%;
+  display:grid;
+  gap:12px;
 }
-#wireframes .c-figure img{
-  height:auto;
-  display:block;
-  object-fit:contain;
-  object-position:center top;
-}
-/* after-test: 4 phones; comps below are 5 across — match phone width */
-#wireframes .c-figure.is-phones-4{
-  width:calc(100% * 4 / 5);
-  max-width:calc(100% * 4 / 5);
-  justify-self:start;
-}
+#wireframes .c-ui-carousel{gap:12px}
+#wireframes .c-phone-cap{color:var(--mute)}
 #wireframes .c-figcap{
   width:100%;
   box-sizing:border-box;
+}
+@media (max-width:640px){
+  #wireframes .c-ui-slide-title{color:var(--mute)}
+  #wireframes .c-ui-arrow{
+    border-color:rgba(0,0,0,.22);
+    color:#111;
+  }
+  #wireframes .c-ui-dot{background:rgba(0,0,0,.22)}
+  #wireframes .c-ui-dot.is-active{background:#111; width:18px}
 }
 @media (max-width:700px){
   #research .c-media,
