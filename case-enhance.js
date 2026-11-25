@@ -362,13 +362,19 @@
           var dx = x - touchStartX;
           var dy = y - touchStartY;
 
-          // Claim the gesture on the phone stage so the page can't drift
-          // while pagination is active — vertical scroll starts outside.
-          if (e.cancelable) e.preventDefault();
-
           if (touchAxis == null) {
             if (Math.max(Math.abs(dx), Math.abs(dy)) < AXIS_LOCK_PX) return;
             touchAxis = Math.abs(dx) >= Math.abs(dy) ? "x" : "y";
+            if (touchAxis === "y") {
+              // Vertical intent — let the page scroll; stop tracking
+              resetTouch();
+              return;
+            }
+          }
+
+          if (touchAxis === "x" && e.cancelable) {
+            // Only block page scroll once the gesture is clearly a slide swipe
+            e.preventDefault();
           }
         },
         { passive: false }
@@ -423,71 +429,11 @@
       syncMode();
     });
 
-    // Mobile: snap carousel units into place under the fixed nav so slides
-    // stay framed; scroll between units to see the other slide sections.
-    (function bindCarouselSectionSnap() {
-      var units = Array.prototype.slice.call(
-        caseRoot.querySelectorAll(".c-wf-group, .c-ui-show.is-onboarding")
-      );
-      if (!units.length || !("IntersectionObserver" in window)) return;
-
-      var snapping = false;
-      var settleTimer = null;
-
-      function navOffset() {
-        var nav = document.querySelector(".case-nav");
-        return nav ? nav.getBoundingClientRect().height + 8 : 72;
-      }
-
-      function snapUnit(el) {
-        if (!mobileMq.matches || snapping || reduceMotion) return;
-        var top =
-          el.getBoundingClientRect().top +
-          (window.scrollY || window.pageYOffset) -
-          navOffset();
-        snapping = true;
-        scrollPage(Math.max(0, top), false);
-        window.setTimeout(function () {
-          snapping = false;
-        }, 450);
-      }
-
-      var io = new IntersectionObserver(
-        function (entries) {
-          if (!mobileMq.matches) return;
-          entries.forEach(function (entry) {
-            entry.target.classList.toggle(
-              "is-snap-active",
-              entry.isIntersecting && entry.intersectionRatio >= 0.55
-            );
-            if (!entry.isIntersecting || entry.intersectionRatio < 0.55) return;
-            if (settleTimer) clearTimeout(settleTimer);
-            var el = entry.target;
-            settleTimer = setTimeout(function () {
-              var rect = el.getBoundingClientRect();
-              var ideal = navOffset();
-              // Only nudge if the unit is visibly off the snap seat
-              if (Math.abs(rect.top - ideal) > 28) snapUnit(el);
-            }, 120);
-          });
-        },
-        { threshold: [0.55, 0.7, 0.85] }
-      );
-
-      units.forEach(function (u) {
+    // Mark slide sections for CSS scroll-snap (no forced scroll hijack)
+    caseRoot
+      .querySelectorAll(".c-wf-group, .c-ui-show.is-onboarding")
+      .forEach(function (u) {
         u.classList.add("is-carousel-snap");
-        io.observe(u);
       });
-
-      function onMq() {
-        if (!mobileMq.matches) {
-          units.forEach(function (u) {
-            u.classList.remove("is-snap-active");
-          });
-        }
-      }
-      if (mobileMq.addEventListener) mobileMq.addEventListener("change", onMq);
-      else if (mobileMq.addListener) mobileMq.addListener(onMq);
-    })();
   })();
 })();

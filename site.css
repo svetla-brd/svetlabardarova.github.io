@@ -597,13 +597,13 @@ body.case-open #case .c-section.is-reveal.is-in{
 }
 /* Mobile only: transform carousel (infinite forward loop) */
 @media (max-width:640px){
-  /* Snap each slide section into place; scroll between them for the rest */
+  /* Soft snap when a slide section settles into view */
   html:has(body.case-open){
     scroll-snap-type:y proximity;
   }
   #case .is-carousel-snap{
     scroll-snap-align:start;
-    scroll-snap-stop:always;
+    scroll-snap-stop:normal;
     scroll-margin-top:clamp(72px,14vw,96px);
   }
   .c-ui-show.is-onboarding{
@@ -630,8 +630,8 @@ body.case-open #case .c-section.is-reveal.is-in{
     display:block;
     overflow:hidden;
     width:100%;
-    /* Horizontal handled by JS; vertical page scroll starts outside stage */
-    touch-action:none;
+    /* Vertical scroll stays native; JS locks only after horizontal intent */
+    touch-action:pan-y;
     -webkit-user-select:none;
     user-select:none;
   }
