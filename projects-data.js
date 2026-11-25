@@ -260,10 +260,10 @@ window.PROJECTS = [
               {"src": "assets/nuklai-forms/wireframes/wf-create-2.png?v=wireframes-6", "caption": "Period"},
               {"src": "assets/nuklai-forms/wireframes/wf-create-3.png?v=wireframes-3", "caption": "Dates"},
               {"src": "assets/nuklai-forms/wireframes/wf-create-4.png?v=wireframes-3", "caption": "Calendar"},
-              {"src": "assets/nuklai-forms/wireframes/wf-builder-1.png?v=wireframes-6", "caption": "Branding"},
-              {"src": "assets/nuklai-forms/wireframes/wf-builder-2.png?v=wireframes-6", "caption": "Question"},
-              {"src": "assets/nuklai-forms/wireframes/wf-builder-3.png?v=wireframes-6", "caption": "Options"},
-              {"src": "assets/nuklai-forms/wireframes/wf-builder-4.png?v=wireframes-6", "caption": "Settings"}
+              {"src": "assets/nuklai-forms/wireframes/wf-builder-1.png?v=wireframes-7", "caption": "Branding"},
+              {"src": "assets/nuklai-forms/wireframes/wf-builder-2.png?v=wireframes-7", "caption": "Question"},
+              {"src": "assets/nuklai-forms/wireframes/wf-builder-3.png?v=wireframes-7", "caption": "Options"},
+              {"src": "assets/nuklai-forms/wireframes/wf-builder-4.png?v=wireframes-7", "caption": "Settings"}
             ]
           }
         ]
