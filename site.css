@@ -648,7 +648,7 @@ body.case-open #case .c-section.is-reveal.is-in{
     will-change:transform;
   }
   .c-ui-phones.is-animating{
-    transition:transform .42s cubic-bezier(.2,.7,.2,1);
+    transition:transform .58s cubic-bezier(.4,0,.2,1);
   }
   .c-phone{
     flex:0 0 100%;
