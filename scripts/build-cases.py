@@ -456,7 +456,7 @@ def render_page(p, projects, socials: str) -> str:
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.css">
-<link rel="stylesheet" href="../site.css?v=wireframes-27">
+<link rel="stylesheet" href="../site.css?v=carousel-axis-28">
 </head>
 <body class="case-open">
 <nav class="case-nav" id="case-nav" aria-label="Case study">
@@ -472,7 +472,7 @@ def render_page(p, projects, socials: str) -> str:
 {render_case_body(p, projects)}
 </article>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.min.js"></script>
-<script src="../case-enhance.js?v=wireframes-27"></script>
+<script src="../case-enhance.js?v=carousel-axis-28"></script>
 </body>
 </html>
 """

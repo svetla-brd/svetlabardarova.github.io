@@ -621,6 +621,10 @@ body.case-open #case .c-section.is-reveal.is-in{
     display:block;
     overflow:hidden;
     width:100%;
+    /* Browser keeps vertical scroll; JS claims horizontal after axis lock */
+    touch-action:pan-y;
+    -webkit-user-select:none;
+    user-select:none;
   }
   .c-ui-phones{
     flex-wrap:nowrap;

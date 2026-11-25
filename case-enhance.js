@@ -318,26 +318,92 @@
           onUserNav(activeIndex + 1);
         });
 
-      // Touch swipe on the viewport
-      var touchX = null;
+      // Axis-locked swipe: decide after ~8px, only claim horizontal drags
+      var AXIS_LOCK_PX = 8;
+      var SWIPE_PX = 40;
+      var touchStartX = null;
+      var touchStartY = null;
+      var touchAxis = null; // null | "x" | "y"
+
+      function resetTouch() {
+        touchStartX = null;
+        touchStartY = null;
+        touchAxis = null;
+      }
+
       viewport.addEventListener(
         "touchstart",
         function (e) {
-          if (!mobileMq.matches || !e.touches || !e.touches.length) return;
-          touchX = e.touches[0].clientX;
+          if (!mobileMq.matches || !e.touches || e.touches.length !== 1) {
+            resetTouch();
+            return;
+          }
+          touchStartX = e.touches[0].clientX;
+          touchStartY = e.touches[0].clientY;
+          touchAxis = null;
           bumpAuto();
         },
         { passive: true }
       );
+
+      viewport.addEventListener(
+        "touchmove",
+        function (e) {
+          if (
+            !mobileMq.matches ||
+            touchStartX == null ||
+            !e.touches ||
+            !e.touches.length
+          ) {
+            return;
+          }
+          var x = e.touches[0].clientX;
+          var y = e.touches[0].clientY;
+          var dx = x - touchStartX;
+          var dy = y - touchStartY;
+
+          if (touchAxis == null) {
+            if (Math.max(Math.abs(dx), Math.abs(dy)) < AXIS_LOCK_PX) return;
+            touchAxis = Math.abs(dx) >= Math.abs(dy) ? "x" : "y";
+            if (touchAxis === "y") {
+              // Vertical page scroll — stop tracking this gesture for the carousel
+              resetTouch();
+              return;
+            }
+          }
+
+          if (touchAxis === "x") {
+            // Keep the page from scrolling while swiping slides
+            if (e.cancelable) e.preventDefault();
+          }
+        },
+        { passive: false }
+      );
+
       viewport.addEventListener(
         "touchend",
         function (e) {
-          if (touchX == null || !e.changedTouches || !e.changedTouches.length)
+          if (
+            touchAxis !== "x" ||
+            touchStartX == null ||
+            !e.changedTouches ||
+            !e.changedTouches.length
+          ) {
+            resetTouch();
             return;
-          var dx = e.changedTouches[0].clientX - touchX;
-          touchX = null;
-          if (Math.abs(dx) < 40) return;
+          }
+          var dx = e.changedTouches[0].clientX - touchStartX;
+          resetTouch();
+          if (Math.abs(dx) < SWIPE_PX) return;
           onUserNav(activeIndex + (dx < 0 ? 1 : -1));
+        },
+        { passive: true }
+      );
+
+      viewport.addEventListener(
+        "touchcancel",
+        function () {
+          resetTouch();
         },
         { passive: true }
       );
