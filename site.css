@@ -468,7 +468,7 @@ body.case-open #case .c-section.is-reveal.is-in{
 /* Wireframes: same phone sizing + wrap/carousel as onboarding UI */
 #wireframes .c-media{
   grid-template-columns:1fr;
-  gap:clamp(28px,5vw,56px);
+  gap:clamp(56px,9vw,96px);
 }
 #wireframes .c-media.cols-2,
 #wireframes .c-media.cols-3{grid-template-columns:1fr}
@@ -477,6 +477,10 @@ body.case-open #case .c-section.is-reveal.is-in{
   width:100%;
   display:grid;
   gap:12px;
+}
+/* Space after the onboarding slide block before the next design figures */
+#case .c-ui-show.is-onboarding{
+  margin-bottom:clamp(40px,7vw,80px);
 }
 #wireframes .c-ui-carousel{gap:12px}
 #wireframes .c-phone-cap{color:var(--mute)}
