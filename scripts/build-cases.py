@@ -147,7 +147,6 @@ def render_dashboard_ui(m):
         f'<div class="dash-orbit" aria-hidden="true"></div>'
         f'<div class="dash-shots">'
         f'<img class="dash-device" src="{esc(page_asset(records.get("phone") or ""))}" alt="{esc(records.get("alt") or "")}" loading="lazy" decoding="async">'
-        f'<img class="dash-spill" src="{esc(page_asset(records.get("more") or ""))}" alt="" loading="lazy" decoding="async">'
         f"</div></div>"
         f'<div class="dash-side">'
         f'<div class="dash-side-spacer" aria-hidden="true"></div>'

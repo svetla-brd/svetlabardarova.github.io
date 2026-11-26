@@ -893,18 +893,11 @@ body.case-open #case .c-section.is-reveal.is-in{
   pointer-events:none;
 }
 .dash-device,
-.dash-spill,
 .dash-action img{
   display:block;
   height:auto;
 }
-.dash-device{width:100%; aspect-ratio:712 / 1496}
-.dash-spill{
-  width:94.382%;
-  margin-left:2.809%;
-  margin-top:-1px;
-  aspect-ratio:672 / 2106;
-}
+.dash-device{width:100%; aspect-ratio:222 / 1024}
 .dash-action img{aspect-ratio:712 / 1492}
 .dash-side{
   grid-column:2;
