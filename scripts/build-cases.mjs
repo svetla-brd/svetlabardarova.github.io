@@ -682,7 +682,7 @@ function renderPage(p) {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.css">
-<link rel="stylesheet" href="../site.css?v=carousel-ease-34">
+<link rel="stylesheet" href="../site.css?v=nav-burger-48">
 </head>
 <body class="case-open">
 <nav class="case-nav" id="case-nav" aria-label="Case study">
@@ -690,15 +690,20 @@ function renderPage(p) {
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20h5v-6h4v6h5V9.5"/></svg>
   </a>
   <div class="case-nav-end">
-    ${SOCIALS}
-    <a class="resume case-nav-blend" href="#" aria-label="Resume">Resume</a>
+    <button type="button" class="case-nav-toggle" aria-expanded="false" aria-controls="case-nav-panel" aria-label="Open menu">
+      <span class="case-nav-toggle-bars" aria-hidden="true"></span>
+    </button>
+    <div class="case-nav-panel" id="case-nav-panel">
+      ${SOCIALS}
+      <a class="resume case-nav-blend" href="#" aria-label="Resume">Resume</a>
+    </div>
   </div>
 </nav>
 <article id="case">
 ${renderCaseBody(p)}
 </article>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.min.js"></script>
-<script src="../case-enhance.js?v=carousel-ease-34"></script>
+<script src="../case-enhance.js?v=nav-burger-48"></script>
 </body>
 </html>
 `;

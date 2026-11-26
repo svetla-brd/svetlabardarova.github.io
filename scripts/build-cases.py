@@ -96,6 +96,72 @@ def card(p):
     )
 
 
+def emphasize(text, words):
+    safe = esc(text)
+    for word in sorted((w for w in words or [] if w), key=len, reverse=True):
+        safe = safe.replace(esc(word), f"<strong>{esc(word)}</strong>")
+    return safe
+
+
+def render_dashboard_ui(m):
+    hero = page_asset(m.get("hero") or "")
+    about = emphasize(m.get("about") or "", m.get("emphasis") or [])
+    arrow = (
+        '<svg viewBox="0 0 16 16" aria-hidden="true">'
+        '<path d="M3.5 3v6.2a2.8 2.8 0 0 0 2.8 2.8H12"/>'
+        '<path d="M9.8 9.6 12.5 12l-2.7 2.4"/>'
+        "</svg>"
+    )
+    features = "".join(
+        f"<li>{arrow}<span>{esc(item)}</span></li>" for item in (m.get("features") or [])
+    )
+    records = m.get("records") or {}
+    action = m.get("action") or {}
+
+    def kicker(label, sub):
+        bits = esc(label or "")
+        if sub:
+            bits += f"<span>{esc(sub)}</span>"
+        return bits
+
+    note = m.get("note") or ""
+    return (
+        f'<div class="c-ui-show is-dashboard">'
+        f'<div class="c-ui-hero"><img src="{esc(hero)}" alt="{esc(m.get("heroAlt") or "")}" loading="eager" decoding="async"></div>'
+        f'<div class="c-ui-about">'
+        f'<div class="c-ui-about-head">'
+        f'<h3>{esc(m.get("label") or "(A) Dashboard")}</h3>'
+        f'<h3>{esc(m.get("aboutTitle") or "About")}</h3>'
+        f"</div>"
+        f'<p class="c-ui-about-body">{about}</p>'
+        f"</div>"
+        f'<div class="dash-stage">'
+        f'<div class="dash-features">'
+        f'<h4>{esc(m.get("featuresTitle") or "Dashboard")}</h4>'
+        f"<ul>{features}</ul>"
+        f"</div>"
+        f'<figure class="dash-records">'
+        f'<div class="dash-stack">'
+        f'<div class="dash-orbit" aria-hidden="true"></div>'
+        f'<div class="dash-shots">'
+        f'<img class="dash-device" src="{esc(page_asset(records.get("phone") or ""))}" alt="{esc(records.get("alt") or "")}" loading="lazy" decoding="async">'
+        f'<img class="dash-spill" src="{esc(page_asset(records.get("more") or ""))}" alt="" loading="lazy" decoding="async">'
+        f"</div></div>"
+        f'<div class="dash-side">'
+        f'<div class="dash-side-spacer" aria-hidden="true"></div>'
+        f'<figcaption class="dash-kicker">{kicker(records.get("label"), records.get("sub"))}</figcaption>'
+        f'<div class="dash-side-spacer is-grow" aria-hidden="true"></div>'
+        f'<p class="dash-create"><span aria-hidden="true">←</span> {esc(m.get("createLabel") or "Create new form")}</p>'
+        f"</div></figure>"
+        f'<figure class="dash-action">'
+        f'<img src="{esc(page_asset(action.get("phone") or ""))}" alt="{esc(action.get("alt") or "")}" loading="lazy" decoding="async">'
+        f'<figcaption class="dash-kicker">{kicker(action.get("label"), action.get("sub"))}</figcaption>'
+        f"</figure>"
+        + (f'<p class="dash-note">{esc(note)}</p>' if note else "")
+        + "</div></div>"
+    )
+
+
 def render_onboarding_ui(m):
     hero = page_asset(m.get("hero") or "")
     about = m.get("about") or ""
@@ -207,6 +273,9 @@ def render_media(items, cols=None):
     for m in items:
         if isinstance(m, dict) and m.get("ui") == "onboarding":
             bits.append(render_onboarding_ui(m))
+            continue
+        if isinstance(m, dict) and m.get("ui") == "dashboard":
+            bits.append(render_dashboard_ui(m))
             continue
         if isinstance(m, dict) and m.get("group") == "phones":
             bits.append(render_phone_group(m))
@@ -456,7 +525,7 @@ def render_page(p, projects, socials: str) -> str:
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.css">
-<link rel="stylesheet" href="../site.css?v=carousel-ease-34">
+<link rel="stylesheet" href="../site.css?v=nav-burger-48">
 </head>
 <body class="case-open">
 <nav class="case-nav" id="case-nav" aria-label="Case study">
@@ -464,15 +533,20 @@ def render_page(p, projects, socials: str) -> str:
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20h5v-6h4v6h5V9.5"/></svg>
   </a>
   <div class="case-nav-end">
-    {socials}
-    <a class="resume case-nav-blend" href="#" aria-label="Resume">Resume</a>
+    <button type="button" class="case-nav-toggle" aria-expanded="false" aria-controls="case-nav-panel" aria-label="Open menu">
+      <span class="case-nav-toggle-bars" aria-hidden="true"></span>
+    </button>
+    <div class="case-nav-panel" id="case-nav-panel">
+      {socials}
+      <a class="resume case-nav-blend" href="#" aria-label="Resume">Resume</a>
+    </div>
   </div>
 </nav>
 <article id="case">
 {render_case_body(p, projects)}
 </article>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.min.js"></script>
-<script src="../case-enhance.js?v=carousel-ease-34"></script>
+<script src="../case-enhance.js?v=nav-burger-48"></script>
 </body>
 </html>
 """

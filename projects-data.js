@@ -4,7 +4,7 @@ window.PROJECTS = [
     "name": "Nuklai Forms",
     "year": "2024",
     "services": "Product Design, Branding",
-    "cover": "assets/covers/nuklai-forms.png",
+    "cover": "assets/covers/nuklai-forms.jpg?v=cover-2",
     "eyebrow": "Case study · Product design",
     "headline": "Nuklai Forms: a no-code form builder that lets anyone collect and reward community data",
     "desc": "I designed the tool end to end, from research and flows to high-fidelity UI and testing, so non-technical creators can launch a rewarded data-collection form in minutes.",
@@ -12,7 +12,7 @@ window.PROJECTS = [
       {"label": "Role", "value": "Product Designer: UX research, product design, branding"},
       {"label": "Timeline", "value": "April – August 2024"},
       {"label": "Team", "value": "PM, engineers, community lead, me as sole designer"},
-      {"label": "Platform", "value": "Web, desktop-first"}
+      {"label": "Platform", "value": "Web and mobile friendly"}
     ],
     "gallery": [
       "https://cdn.myportfolio.com/c1feb494-2211-42d3-95ed-54a318116a0c/d841b8d7-966a-459d-9fe2-f11ed21db249_rw_3840.png?h=6f355a54938514cb3d498ea36c7a5239",
@@ -35,7 +35,7 @@ window.PROJECTS = [
         "id": "overview",
         "label": "Overview",
         "kicker": "01 · Overview",
-        "title": "What is Nuklai?",
+        "title": "What is Nuklai Forms?",
         "body": [
           "Nuklai turns form submissions into datasets people can subscribe to for ongoing analysis. The form builder (also called the web page builder) is how data enters the platform: it lets influencers, Web3 projects and businesses gather data from their community and reward people fairly for sharing it. It also supports contests, like the Bitcoin campaign Nuklai ran itself."
         ]
@@ -217,7 +217,7 @@ window.PROJECTS = [
           "I mapped the full user flow from first sign-in to a published, reward-enabled form. This exposed an early risk: users had to make reward decisions before they’d seen their form, which felt abstract and stressful."
         ],
         "media": [
-          {"src": "assets/nuklai-forms/before-test.png", "caption": "Information architecture: create, edit, and publish."}
+          {"src": "assets/nuklai-forms/before-test.png?v=flow-2", "caption": "User flow: from splash to publish."}
         ],
         "bodyAfter": [
           "In low-fidelity wireframes I explored two structures for creating and editing: a step-by-step wizard and a single-page builder. I chose a guided flow for creation, because newcomers needed hand-holding, and a flexible single view for editing, where returning users want speed."
@@ -333,7 +333,7 @@ window.PROJECTS = [
           {"src": "assets/nuklai-forms/hi-edit.png", "caption": "Edit form: flexible view for returning users."},
           {
             "ui": "onboarding",
-            "hero": "assets/nuklai-forms/ob-hero.png",
+            "hero": "assets/nuklai-forms/ob-hero.jpg?v=hero-2",
             "label": "(A) Onboarding",
             "aboutTitle": "About",
             "about": "Our forms app onboarding process ensures a quick and secure setup by offering sign-in options via Google, Microsoft, or email. This streamlined approach allows users to immediately access a personalized Dashboard for creating, customizing, and managing forms. As a result, we achieved faster user adoption rates and higher overall satisfaction.",
@@ -346,7 +346,32 @@ window.PROJECTS = [
               {"src": "assets/nuklai-forms/ob-dashboard.png?v=3", "caption": "Dashboard"}
             ]
           },
-          {"src": "assets/nuklai-forms/hi-extra2.png"},
+          {
+            "ui": "dashboard",
+            "hero": "assets/nuklai-forms/dash-hero.png",
+            "heroAlt": "Phone on a teal folio showing the forms dashboard, beside an open earbud case",
+            "label": "(A) Dashboard",
+            "aboutTitle": "About",
+            "about": "The Dashboard serves as a central hub for managing forms efficiently. It can be used to access Templates for quick starts, review Recents, and refine Drafts. Forms that are Requiring Action can be tracked easily, and frequently used designs are conveniently stored in Favourites. For creating new forms, the Create New Form button provides a seamless starting point.",
+            "emphasis": ["Templates", "Recents", "Drafts", "Requiring Action", "Favourites", "Create New Form"],
+            "featuresTitle": "Dashboard",
+            "features": ["Templates", "Records", "Charts", "Recurring Action", "Favourites", "Create new form"],
+            "records": {
+              "phone": "assets/nuklai-forms/dash-records.png",
+              "more": "assets/nuklai-forms/dash-records-more.png",
+              "alt": "Dashboard records feed on a phone",
+              "label": "Dashboard",
+              "sub": "/ Records"
+            },
+            "action": {
+              "phone": "assets/nuklai-forms/dash-action.png",
+              "alt": "Dashboard requiring action tab, with a pending publishing notice",
+              "label": "Dashboard",
+              "sub": "/ Recurring action"
+            },
+            "createLabel": "Create new form",
+            "note": "Users should publish their forms before receiving submissions, as they are initially stored as drafts in app.nukl.ai. Forms must be published within 14 days, after which the draft will be deleted. However, users can still access their drafts in the \"Drafts\" section after this period."
+          },
           {"src": "assets/nuklai-forms/hi-extra3.png"},
           {"src": "assets/nuklai-forms/hi-extra4.png"}
         ]

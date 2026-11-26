@@ -1,4 +1,48 @@
 (function () {
+  // Mobile case nav: hamburger toggles Resume + socials
+  (function bindCaseNavMenu() {
+    var nav = document.getElementById("case-nav");
+    if (!nav) return;
+    var toggle = nav.querySelector(".case-nav-toggle");
+    var panel = nav.querySelector("#case-nav-panel");
+    if (!toggle || !panel) return;
+
+    function setOpen(open) {
+      nav.classList.toggle("is-menu-open", open);
+      document.body.classList.toggle("case-menu-open", open);
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    }
+
+    toggle.addEventListener("click", function (e) {
+      e.stopPropagation();
+      setOpen(!nav.classList.contains("is-menu-open"));
+    });
+
+    document.addEventListener("click", function (e) {
+      if (!nav.classList.contains("is-menu-open")) return;
+      if (nav.contains(e.target)) return;
+      setOpen(false);
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") setOpen(false);
+    });
+
+    panel.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        setOpen(false);
+      });
+    });
+
+    var mq = window.matchMedia("(max-width: 640px)");
+    function onMq() {
+      if (!mq.matches) setOpen(false);
+    }
+    if (mq.addEventListener) mq.addEventListener("change", onMq);
+    else if (mq.addListener) mq.addListener(onMq);
+  })();
+
   var caseRoot = document.getElementById("case");
   if (!caseRoot) return;
 
@@ -165,7 +209,7 @@
       var autoTimer = null;
       var resumeTimer = null;
       var animating = false;
-      var AUTO_MS = 3600;
+      var AUTO_MS = 7000;
       var firstClone = null;
       var lastClone = null;
 
