@@ -82,9 +82,11 @@ def cover_img(p, alt=None):
     src = page_asset(p.get("cover") or "")
     if not src:
         return ""
+    pos = p.get("coverPosition") or ""
+    style = f' style="object-position:{esc(pos)}"' if pos else ""
     return (
-        f'<img src="{esc(src)}" alt="{esc(alt or p.get("name") or "")}" '
-        f'loading="lazy" decoding="async">'
+        f'<img src="{esc(src)}" alt="{esc(alt or p.get("name") or "")}"'
+        f'{style} loading="lazy" decoding="async">'
     )
 
 

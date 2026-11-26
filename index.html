@@ -65,7 +65,10 @@ var PROJECTS = window.PROJECTS || [];
 function coverImg(p, alt){
   var src = p.cover || "";
   if(!src) return "";
-  return '<img src="'+src+'" alt="'+(alt||p.name||"")+'" loading="lazy" decoding="async">';
+  var pos = p.coverPosition
+    ? ' style="object-position:'+p.coverPosition+'"'
+    : "";
+  return '<img src="'+src+'" alt="'+(alt||p.name||"")+'"'+pos+' loading="lazy" decoding="async">';
 }
 
 var thumbs = document.getElementById("thumbs");
@@ -90,7 +93,7 @@ PROJECTS.forEach(function(p, i){
 
 (function(){
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
-  var compact = window.matchMedia("(max-width: 900px)");
+  var compact = window.matchMedia("(max-width: 640px)");
   var items = Array.prototype.slice.call(thumbs.querySelectorAll(".thumb"));
   if (!items.length) return;
   if (reduced.matches || compact.matches){

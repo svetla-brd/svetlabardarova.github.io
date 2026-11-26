@@ -97,12 +97,17 @@ function parseCopySections(copy) {
 function coverImg(p, alt) {
   var src = pageAsset(p.cover || "");
   if (!src) return "";
+  var pos = p.coverPosition
+    ? ' style="object-position:' + escapeAttr(p.coverPosition) + '"'
+    : "";
   return (
     '<img src="' +
     escapeAttr(src) +
     '" alt="' +
     escapeAttr(alt || p.name || "") +
-    '" loading="lazy" decoding="async">'
+    '"' +
+    pos +
+    ' loading="lazy" decoding="async">'
   );
 }
 
