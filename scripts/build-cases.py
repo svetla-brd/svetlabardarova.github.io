@@ -144,10 +144,19 @@ def render_dashboard_ui(m):
         f"</div>"
         f'<figure class="dash-records">'
         f'<div class="dash-stack">'
+        f'<div class="dash-scroll-scene" data-dash-scroll>'
+        f'<div class="dash-scroll-pin">'
         f'<div class="dash-orbit" aria-hidden="true"></div>'
-        f'<div class="dash-shots">'
-        f'<img class="dash-device" src="{esc(page_asset(records.get("phone") or ""))}" alt="{esc(records.get("alt") or "")}" loading="lazy" decoding="async">'
-        f"</div></div>"
+        f'<div class="dash-scroll-phone">'
+        f'<div class="dash-scroll-clip">'
+        f'<div class="dash-scroll-rail">'
+        f'<img class="dash-scroll-list" src="{esc(page_asset(records.get("scroll") or ""))}" alt="{esc(records.get("alt") or "")}" loading="lazy" decoding="async">'
+        f"</div>"
+        f'<img class="dash-scroll-head" src="{esc(page_asset(records.get("head") or ""))}" alt="" aria-hidden="true" loading="lazy" decoding="async">'
+        f'<img class="dash-scroll-cta" src="{esc(page_asset(records.get("cta") or ""))}" alt="" aria-hidden="true" loading="lazy" decoding="async">'
+        f"</div>"
+        f'<img class="dash-scroll-frame" src="{esc(page_asset(records.get("frame") or ""))}" alt="" aria-hidden="true" loading="lazy" decoding="async">'
+        f"</div></div></div></div>"
         f'<div class="dash-side">'
         f'<div class="dash-side-spacer" aria-hidden="true"></div>'
         f'<figcaption class="dash-kicker">{kicker(records.get("label"), records.get("sub"))}</figcaption>'
@@ -526,7 +535,7 @@ def render_page(p, projects, socials: str) -> str:
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.css">
-<link rel="stylesheet" href="../site.css?v=nav-burger-48">
+<link rel="stylesheet" href="../site.css?v=dash-end-pad-5">
 </head>
 <body class="case-open">
 <nav class="case-nav" id="case-nav" aria-label="Case study">
@@ -547,7 +556,7 @@ def render_page(p, projects, socials: str) -> str:
 {render_case_body(p, projects)}
 </article>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.min.js"></script>
-<script src="../case-enhance.js?v=nav-burger-48"></script>
+<script src="../case-enhance.js?v=dash-end-pad-5"></script>
 </body>
 </html>
 """

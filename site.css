@@ -797,7 +797,7 @@ body.case-open #case .c-section.is-reveal.is-in{
   margin-bottom:clamp(12px,2vw,28px);
   background:#f7f7f7;
   color:#1c1c1c;
-  overflow:hidden;
+  overflow:visible;
 }
 .c-ui-show.is-dashboard .c-ui-hero{
   border-radius:clamp(18px,2.2vw,28px);
@@ -880,17 +880,119 @@ body.case-open #case .c-section.is-reveal.is-in{
   z-index:1;
 }
 .dash-shots{position:relative; z-index:1; filter:drop-shadow(0 18px 28px rgba(16,40,48,.12))}
+/* Lives inside the pin so it stays fixed with the phone */
 .dash-orbit{
   position:absolute;
   z-index:0;
   left:50%;
-  top:34%;
+  top:50%;
   width:280%;
   aspect-ratio:1;
-  transform:translate(-50%,-38%);
+  transform:translate(-50%,-50%);
   border-radius:50%;
   background:#d2eaed;
   pointer-events:none;
+}
+/* Layers: frame 902×1820, UI 807 wide (inset), head 829, cta 195, content 3308
+   Layout % are hardcoded so they still work when the pin is moved to document.body */
+.dash-scroll-scene{
+  --dash-phone-h:0px;
+  --dash-travel:0px;
+  --dash-after:0px;
+  position:relative;
+  height:calc(var(--dash-phone-h) + var(--dash-travel) + var(--dash-after));
+  z-index:1;
+}
+.dash-scroll-pin{
+  --dash-p:0;
+  --dash-travel:0px;
+  position:relative;
+  width:100%;
+  height:var(--dash-phone-h, auto);
+  overflow:visible;
+}
+.dash-scroll-pin.is-fixed{
+  position:fixed;
+  margin:0;
+  z-index:5;
+  overflow:visible;
+}
+.dash-scroll-pin.is-done{
+  position:absolute;
+  top:var(--dash-travel, 0px);
+  bottom:auto;
+  left:0;
+  width:100%;
+}
+.dash-scroll-phone{
+  position:relative;
+  z-index:1;
+  width:100%;
+  height:100%;
+  overflow:visible;
+  filter:drop-shadow(0 18px 28px rgba(16,40,48,.12));
+}
+/* Clips UI layers to the phone silhouette; frame stays outside so bezels stay crisp */
+.dash-scroll-clip{
+  position:absolute;
+  inset:0;
+  z-index:1;
+  overflow:visible;
+  /* clip-path set in JS: rounded top matching frame, open bottom for spill */
+}
+.dash-scroll-pin.is-done .dash-scroll-clip{
+  overflow:hidden;
+}
+.dash-scroll-pin.is-done .dash-scroll-phone{
+  overflow:hidden;
+}
+.dash-scroll-rail{
+  position:absolute;
+  /* Content layer 814 wide on 902 frame → inset 44/902 */
+  left:4.878%;
+  right:4.878%;
+  top:47.857%; /* (42+829)/1820 — under head at inner screen top */
+  z-index:1;
+  overflow:visible;
+}
+.dash-scroll-list{
+  display:block;
+  width:100%;
+  max-width:100%;
+  height:auto;
+  aspect-ratio:814 / 3361;
+  will-change:transform;
+}
+.dash-scroll-head,
+.dash-scroll-cta{
+  position:absolute;
+  left:5.543%;
+  width:89.914%; /* 804/902 */
+  max-width:89.914%;
+  height:auto;
+  pointer-events:none;
+  user-select:none;
+  z-index:3;
+}
+.dash-scroll-head{
+  top:2.308%; /* 42/1820 — inner screen edge, ignoring island */
+  aspect-ratio:806 / 829;
+}
+.dash-scroll-cta{
+  top:86.923%; /* (1777-195)/1820 */
+  aspect-ratio:807 / 195;
+}
+.dash-scroll-frame{
+  position:absolute;
+  left:0;
+  top:0;
+  width:100%;
+  max-width:100%;
+  height:auto;
+  aspect-ratio:902 / 1820;
+  z-index:4;
+  pointer-events:none;
+  user-select:none;
 }
 .dash-device,
 .dash-action img{
@@ -899,6 +1001,21 @@ body.case-open #case .c-section.is-reveal.is-in{
 }
 .dash-device{width:100%; aspect-ratio:902 / 4146}
 .dash-action img{aspect-ratio:712 / 1492}
+@media (prefers-reduced-motion:reduce){
+  .dash-scroll-scene{height:auto}
+  .dash-scroll-pin,
+  .dash-scroll-pin.is-fixed,
+  .dash-scroll-pin.is-done{
+    position:relative;
+    top:auto;
+    bottom:auto;
+    left:auto;
+    width:100%;
+    height:auto;
+  }
+  .dash-scroll-rail{position:relative; top:auto; bottom:auto; overflow:visible}
+  .dash-scroll-rail .dash-scroll-list{transform:none}
+}
 .dash-side{
   grid-column:2;
   grid-row:1;
@@ -989,7 +1106,7 @@ body.case-open #case .c-section.is-reveal.is-in{
     padding:2px 0 0;
   }
   .dash-side-spacer{display:none}
-  .dash-orbit{width:220%; top:28%}
+  .dash-orbit{width:220%}
   .dash-action{
     grid-template-columns:1fr;
     justify-items:center;

@@ -481,4 +481,255 @@
       });
   })();
 
+  // Phone truly viewport-fixed; only Recents list/spill moves
+  (function bindDashScroll() {
+    var scenes = Array.prototype.slice.call(
+      caseRoot.querySelectorAll("[data-dash-scroll]")
+    );
+    if (!scenes.length) return;
+
+    // Frame 902×1820; UI layers 807 wide; head 829; content 3308
+    var PHONE_RATIO = 1820 / 902;
+    var CONTENT_W_RATIO = 814 / 902;
+    var LIST_TOP_RATIO = (42 + 829) / 1820; // under head at inner screen top
+    var SCROLL_ASPECT = 3361 / 814;
+    var AFTER_RATIO = 0.45; // breathing room after the phone once scroll finishes
+    var CORNER_RATIO = 140 / 902; // outer corner radius of the frame asset
+    var CLIP_TOP_RATIO = 42 / 1820; // inner screen edge, ignoring island
+    var END_PAD_RATIO = 180 / 1820; // slight nudge so the last article peeks clear
+
+    function clearPinStyles(pin) {
+      pin.style.top = "";
+      pin.style.left = "";
+      pin.style.width = "";
+      pin.style.height = "";
+    }
+
+    function undock(pin) {
+      if (!pin._docked) return;
+      if (pin._placeholder && pin._placeholder.parentNode) {
+        pin._placeholder.parentNode.insertBefore(pin, pin._placeholder);
+        pin._placeholder.parentNode.removeChild(pin._placeholder);
+      }
+      pin._placeholder = null;
+      pin._docked = false;
+    }
+
+    function dockToBody(pin, top, left, width, phoneH) {
+      if (!pin._docked) {
+        var ph = document.createElement("div");
+        ph.className = "dash-scroll-placeholder";
+        ph.style.height = phoneH + "px";
+        ph.style.width = "100%";
+        pin.parentNode.insertBefore(ph, pin);
+        pin._placeholder = ph;
+        document.body.appendChild(pin);
+        pin._docked = true;
+      }
+      pin.style.top = top + "px";
+      pin.style.left = left + "px";
+      pin.style.width = width + "px";
+      pin.style.height = phoneH + "px";
+    }
+
+    function measure(scene) {
+      var width = scene.getBoundingClientRect().width;
+      if (!width) return null;
+      var phoneH = width * PHONE_RATIO;
+      var contentW = width * CONTENT_W_RATIO;
+      var scrollH = contentW * SCROLL_ASPECT;
+      var listTop = phoneH * LIST_TOP_RATIO;
+      // Stop near phone bottom, nudged up slightly so the last article shows
+      var travel = Math.max(0, scrollH - (phoneH - listTop) + phoneH * END_PAD_RATIO);
+      var after = phoneH * AFTER_RATIO;
+      var cornerR = width * CORNER_RATIO;
+      scene.style.setProperty("--dash-phone-h", phoneH + "px");
+      scene.style.setProperty("--dash-travel", travel + "px");
+      scene.style.setProperty("--dash-after", after + "px");
+      if (scene._pin) {
+        scene._pin.style.setProperty("--dash-phone-h", phoneH + "px");
+        scene._pin.style.setProperty("--dash-travel", travel + "px");
+        var clipEl = scene._pin.querySelector(".dash-scroll-clip");
+        if (clipEl) {
+          // Rounded rect matching outer frame corners; open far below for spill.
+          // Top is inset so the cut sits inside the mockup rim.
+          var r = cornerR;
+          var w = width;
+          var h = phoneH;
+          var top = phoneH * CLIP_TOP_RATIO;
+          var spill = Math.ceil(h + travel + after + 200);
+          clipEl._clipSpill =
+            "path('M " +
+            r +
+            " " +
+            top +
+            " H " +
+            (w - r) +
+            " A " +
+            r +
+            " " +
+            r +
+            " 0 0 1 " +
+            w +
+            " " +
+            (top + r) +
+            " V " +
+            spill +
+            " H 0 V " +
+            (top + r) +
+            " A " +
+            r +
+            " " +
+            r +
+            " 0 0 1 " +
+            r +
+            " " +
+            top +
+            " Z')";
+          clipEl._clipDone =
+            "path('M " +
+            r +
+            " " +
+            top +
+            " H " +
+            (w - r) +
+            " A " +
+            r +
+            " " +
+            r +
+            " 0 0 1 " +
+            w +
+            " " +
+            (top + r) +
+            " V " +
+            (h - r) +
+            " A " +
+            r +
+            " " +
+            r +
+            " 0 0 1 " +
+            (w - r) +
+            " " +
+            h +
+            " H " +
+            r +
+            " A " +
+            r +
+            " " +
+            r +
+            " 0 0 1 0 " +
+            (h - r) +
+            " V " +
+            (top + r) +
+            " A " +
+            r +
+            " " +
+            r +
+            " 0 0 1 " +
+            r +
+            " " +
+            top +
+            " Z')";
+        }
+      }
+      return { width: width, phoneH: phoneH, travel: travel, after: after };
+    }
+
+    function updateScene(scene) {
+      var pin = scene._pin;
+      if (!pin) return;
+
+      var metrics = measure(scene);
+      if (!metrics) return;
+
+      var list = pin.querySelector(".dash-scroll-list");
+      var phoneH = metrics.phoneH;
+      var travel = metrics.travel;
+      // Dead-center in the viewport
+      var top = Math.max(0, (window.innerHeight - phoneH) / 2);
+      var left = Math.max(0, (window.innerWidth - metrics.width) / 2);
+
+      var clipEl = pin.querySelector(".dash-scroll-clip");
+
+      function setClip(done) {
+        if (!clipEl) return;
+        clipEl.style.clipPath = done
+          ? clipEl._clipDone || ""
+          : clipEl._clipSpill || "";
+      }
+
+      function setProgress(p) {
+        scene.style.setProperty("--dash-p", String(p));
+        scene.style.setProperty("--dash-travel", travel + "px");
+        pin.style.setProperty("--dash-p", String(p));
+        pin.style.setProperty("--dash-travel", travel + "px");
+        if (list) {
+          list.style.transform =
+            p <= 0 ? "" : "translate3d(0, " + -p * travel + "px, 0)";
+        }
+      }
+
+      if (reduceMotion) {
+        undock(pin);
+        pin.classList.remove("is-fixed", "is-done");
+        clearPinStyles(pin);
+        setClip(true);
+        setProgress(0);
+        return;
+      }
+
+      var rect = scene.getBoundingClientRect();
+
+      // Still above the pin point — reset
+      if (travel <= 0 || rect.top > top) {
+        undock(pin);
+        pin.classList.remove("is-fixed", "is-done");
+        clearPinStyles(pin);
+        setClip(false);
+        setProgress(0);
+        return;
+      }
+
+      var p = (top - rect.top) / travel;
+      if (p < 0) p = 0;
+      if (p > 1) p = 1;
+
+      // Content finished filling the phone — freeze and release to page scroll
+      if (p >= 1 || rect.bottom - phoneH <= top) {
+        undock(pin);
+        pin.classList.remove("is-fixed");
+        pin.classList.add("is-done");
+        clearPinStyles(pin);
+        setClip(true);
+        setProgress(1); // keep screen filled; no more list motion
+        return;
+      }
+
+      pin.classList.add("is-fixed");
+      pin.classList.remove("is-done");
+      dockToBody(pin, top, left, metrics.width, phoneH);
+      setClip(false);
+      setProgress(p);
+    }
+
+    function update() {
+      scenes.forEach(updateScene);
+    }
+
+    scenes.forEach(function (scene) {
+      scene._pin = scene.querySelector(".dash-scroll-pin");
+      if (!scene._pin) return;
+      var img = scene._pin.querySelector(".dash-scroll-list");
+      if (img && !img.complete) img.addEventListener("load", update);
+    });
+
+    window.addEventListener("resize", update);
+
+    if (lenis && typeof lenis.on === "function") {
+      lenis.on("scroll", update);
+    } else {
+      window.addEventListener("scroll", update, { passive: true });
+    }
+    update();
+  })();
 })();

@@ -358,7 +358,10 @@ window.PROJECTS = [
             "featuresTitle": "Dashboard",
             "features": ["Templates", "Records", "Charts", "Recurring Action", "Favourites", "Create new form"],
             "records": {
-              "phone": "assets/nuklai-forms/dash-records.png?v=scroll-2",
+              "frame": "assets/nuklai-forms/dash-records-frame.png?v=parts-1",
+              "head": "assets/nuklai-forms/dash-records-head.png?v=parts-1",
+              "scroll": "assets/nuklai-forms/dash-records-scroll.png?v=parts-2",
+              "cta": "assets/nuklai-forms/dash-records-cta.png?v=parts-1",
               "alt": "Dashboard records feed on a phone",
               "label": "Dashboard",
               "sub": "/ Records"
