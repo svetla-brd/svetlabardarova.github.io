@@ -658,7 +658,7 @@ body.case-open #case .c-section.is-reveal.is-in{
   line-height:1.15;
 }
 .c-ui-about-body{
-  margin:0;
+  margin:0 0 clamp(24px,5vw,48px);
   max-width:36rem;
   justify-self:end;
   width:100%;
